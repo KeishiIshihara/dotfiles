@@ -1,0 +1,1 @@
+/home/shuji/dotfiles/.vim
