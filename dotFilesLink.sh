@@ -33,7 +33,8 @@ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 ##################################
 # Install tmux
 sudo apt-get install aptitude
-sudo aptitude install tmux
+sudo aptitude install tmux # NOTE: tmux should be version 1.8. Please check whether you have the right version. If not, downgrade it via apt.
+
 git clone git://github.com/erikw/tmux-powerline.git ~/tmux-powerline
 
 
