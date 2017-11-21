@@ -117,11 +117,6 @@ fi
 source ~/.ros_setup
 ulimit -c unlimited
 
-export PATH=/usr/local/cuda-7.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
-
-source /etc/profile.d/genicam.sh
-
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source ~/.tmuxinator/tmuxinator.bash
 #source ~/.tmuxautorun
