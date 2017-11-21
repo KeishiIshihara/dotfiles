@@ -34,20 +34,9 @@ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 # Install tmux
 sudo apt-get install aptitude
 sudo aptitude install tmux
+git clone git://github.com/erikw/tmux-powerline.git ~/tmux-powerline
 
-# Original repository:git clone git://github.com/erikw/tmux-powerline.git ~/tmux-powerline
-git clone git://github.com/shuj1/tmux-powerline.git ~/tmux-powerline
 
-# Copy the symbol font to a valid font path.
-mkdir ~/.fonts
-cp ~/tmux-powerline/fonts/PowerlineSymbols.otf ~/.fonts/
-
-# Update font cache for the path the font was moved to (root priveleges may be needed to update cache for the system-wide paths).
-fc-cache -vf ~/.fonts/
-
-# Install the fontconfig file. For newer versions of fontconfig the config path is ~/.config/fontconfig/conf.d/, for older versions it’s ~/.fonts.conf.d/ .
-mkdir -p ~/.config/fontconfig/conf.d
-cp ~/tmux-powerline/fonts/10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 #########################################################################
 ##### Install Ricty font (http://www.rs.tus.ac.jp/yyusa/ricty.html) #####
@@ -58,6 +47,7 @@ sudo apt-get update
 sudo apt-get install fontforge
 
 # Get Google Fonts Inconsolata and M+ IPA synthesized font Migu 1M
+mkdir ~/.fonts
 cp Ricty/Inconsolata/Inconsolata-Bold.ttf ~/.fonts/
 cp Ricty/Inconsolata/Inconsolata-Regular.ttf ~/.fonts/
 cp Ricty/migu-1m-20150712/migu-1m-bold.ttf ~/.fonts/
