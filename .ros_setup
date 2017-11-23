@@ -43,5 +43,5 @@ alias rviz_hsr_simple='rosrun rviz rviz  -d `rospack find hsrb_common_launch`/co
 
 
 
-# Qt creator (ros_qtc_plugin)
-source /opt/qt57/bin/qt57-env.sh
+## Qt creator (ros_qtc_plugin)
+#source /opt/qt57/bin/qt57-env.sh
