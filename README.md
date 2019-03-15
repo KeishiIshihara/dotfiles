@@ -4,14 +4,14 @@ Developing in progress.
 
 ## TODO
 - [x] Makefile作成
-- [x] とりあえずMacOSに最適化
-- [ ] git pushを自動化
+- [x] とりあえずmacOSに最適化
+- [ ] macOS版.tmux.configを作成
 - [ ] Ubuntu用に処理を分ける
 - [ ] マルチプラットフォーム化
 - [ ] ワンコマンドで環境構築
 - [ ] サブモジュール化する
-- [ ] tmux,vimをカスタマイズ
-- [ ] docker configを追加
+- [ ] git pushなども自動化(?)
+- [ ] その他のconfigを随時更新
 
 
 Some dotfiles are **disabled** temporary.  
