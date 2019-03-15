@@ -1,0 +1,5 @@
+[http]
+	sslVerify = false
+[user]
+	name = KeishiIshihara
+	email = ishihara@aisl.cs.tut.ac.jp
