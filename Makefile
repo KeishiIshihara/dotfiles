@@ -27,6 +27,8 @@ deploy: ## Create symlink to home directory
 init: ## Setup environment settings 
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
+init_docker: ## Setup environment settings 
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init_for_docker.sh
 
 update: ## Fetch changes for this repo
 	git pull origin master
