@@ -1,6 +1,6 @@
 # dotfiles
 Awesome dotfiles including vim, tex, ros and tmux configs.  
-Developing in progress.
+This dotfiles isn't completed yet. 
 
 ## TODO
 - [x] Makefile作成
@@ -12,7 +12,7 @@ Developing in progress.
 - [ ] サブモジュール化する
 - [ ] git pushなども自動化(?)
 - [ ] その他のconfigを随時更新
-
+- [ ] dotfiles for dockerも作ろうかな
 
 Some dotfiles are **disabled** temporary.  
 > .bashrc .ros_setup .vim .vimrc .ycm_extra_conf.py
@@ -24,24 +24,61 @@ $ cd && git clone https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotf
 $ cd dotfiles
 $ make install
 ```
-<!-- 
-## Structure
-```
-dotfiles   
-├ .tmuxinator
-├ .vim
-├ Ricty
-├ etc
-├ 
-├  
 
-``` -->
+## Directory structure
+Directory structure is as follows.
+
+```
+.
+├── .tmuxinator
+├── .vim
+├── .etc
+│   └── init
+│       └── init_for_ubuntu.sh
+├── Ricty
+│   ├── Inconsolata
+│   │   ├── Inconsolata-Bold.ttf
+│   │   ├── Inconsolata-Regular.ttf
+│   │   └── OFL.txt
+│   └── migu-1m-20150712
+│       ├── ipag00303
+│       ├── mplus-TESTFLIGHT-060
+│       ├── migu-1m-bold.ttf
+│       ├── migu-1m-regular.ttf
+│       └── migu-README.txt
+├── .gitignore
+
+-----
+├── docker
+│   └── data_lab
+│       ├── Dockerfile
+│       └── docker-compose.yml
+├── keys
+│   └── gcloud-secret.json
+├── requirements.txt
+├── ..others..
+└── src
+    ├── labs/__init__.py
+    └── labs/awesomes/hogehoge.py
+```
 
 ## Make your own customizations
 Create your dotfile on root directory of this repository.
 ```
 $ make deploy
 ```
+
+## Docker container
+You can test this dotfile on the docker container.
+```
+$ docker run --rm -it ununtu:latest bash
+
+## On the container
+# cd && git clone https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles.git
+# cd dotfiles
+# make install
+```
+
 
 ## References
 
