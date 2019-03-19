@@ -23,11 +23,11 @@ apt-get isntall -y vim
 ##### Install tmux-powerline #####
 ##################################
 # Install tmux
-apt-get install aptitude
-aptitude install ruby
-aptitude install tmux # NOTE: tmux should be version 1.8. Please check whether you have the right version. If not, downgrade it via apt.
+apt-get install -y aptitude
+aptitude install -y ruby
+aptitude install -y tmux # NOTE: tmux should be version 1.8. Please check whether you have the right version. If not, downgrade it via apt.
 
-gem install rubygems-update
+gem install -y rubygems-update
 update_rubygems
-gem install tmuxinator
+gem install -y tmuxinator
 # git clone git://github.com/erikw/tmux-powerline.git ~/tmux-powerline
