@@ -1,0 +1,1 @@
+docker build --build-arg GITHUB_USER=<github-user-name> --build-arg GITHUB_TOKEN=<github-oauth-token> .
