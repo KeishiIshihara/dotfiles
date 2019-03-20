@@ -1,7 +1,7 @@
 #variables # Now suited to my mac
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .bashrc .ros_setup .vim .vimrc .ycm_extra_conf.py
+EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .ros_setup .vim .vimrc .ycm_extra_conf.py
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 #command : here are for better understanding
@@ -31,7 +31,7 @@ init_docker: ## Setup environment settings
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init_for_docker.sh
 
 init_mac: ## Setup environment settings 
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init_for_ubuntu.sh
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init_for_ubutntu.sh
 
 update: ## Fetch changes for this repo
 	git pull origin master

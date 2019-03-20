@@ -1,3 +1,16 @@
+#       ___           ___           ___           ___           ___           ___      
+#      /\  \         /\  \         /\  \         /\__\         /\  \         /\  \     
+#     /::\  \       /::\  \       /::\  \       /:/  /        /::\  \       /::\  \    
+#    /:/\:\  \     /:/\:\  \     /:/\ \  \     /:/__/        /:/\:\  \     /:/\:\  \   
+#   /::\~\:\__\   /::\~\:\  \   _\:\~\ \  \   /::\  \ ___   /::\~\:\  \   /:/  \:\  \  
+#  /:/\:\ \:|__| /:/\:\ \:\__\ /\ \:\ \ \__\ /:/\:\  /\__\ /:/\:\ \:\__\ /:/__/ \:\__\ 
+#  \:\~\:\/:/  / \/__\:\/:/  / \:\ \:\ \/__/ \/__\:\/:/  / \/_|::\/:/  / \:\  \  \/__/ 
+#   \:\ \::/  /       \::/  /   \:\ \:\__\        \::/  /     |:|::/  /   \:\  \       
+#    \:\/:/  /        /:/  /     \:\/:/  /        /:/  /      |:|\/__/     \:\  \      
+#     \::/__/        /:/  /       \::/  /        /:/  /       |:|  |        \:\__\     
+#      ~~            \/__/         \/__/         \/__/         \|__|         \/__/     
+#  
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -85,10 +98,37 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ..='cd ..'
+alias ld='ls -ld'          # Show info about the directory
+alias lla='ls -lAF'        # Show hidden all files
+alias ll='ls -lF'          # Show long file information
+alias l='ls -1F'          # Show long file information
+alias la='ls -AF'          # Show hidden files
+alias lx='ls -lXB'         # Sort by extension
+alias lk='ls -lSr'         # Sort by size, biggest last
+alias lc='ls -ltcr'        # Sort by and show change time, most recent last
+alias lu='ls -ltur'        # Sort by and show access time, most recent last
+alias lt='ls -ltr'         # Sort by date, most recent last
+alias lr='ls -lR'          # Recursive ls
+
+# defalt settings
+# alias ll='ls -alF'
+# alias la='ls -A'
+# alias l='ls -CF'
+
 alias sb='source ~/.bashrc'
+
+alias cp="cp -i"
+alias mv="mv -i"
+
+# # Use if colordiff exists
+# if has 'colordiff'; then
+#     alias diff='colordiff -u'
+# else
+#     alias diff='diff -u'
+# fi
+
+# alias vi="vim"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -114,9 +154,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source ~/.ros_setup
+# source ~/.ros_setup
+source ~/.aisl_ssh_list
+
 ulimit -c unlimited
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source ~/.tmuxinator/tmuxinator.bash
-#source ~/.tmuxautorun
+# source ~/.tmuxautorun

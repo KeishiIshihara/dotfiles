@@ -2,19 +2,8 @@
 Awesome dotfiles including vim, tex, ros and tmux configs.  
 This dotfiles isn't completed yet. 
 
-## TODO
-- [x] Makefile作成
-- [x] とりあえずmacOSに最適化
-- [ ] macOS版.tmux.configを作成
-- [ ] Ubuntu用に処理を分ける
-- [ ] マルチプラットフォーム化
-- [ ] ワンコマンドで環境構築
-- [ ] サブモジュール化する
-- [ ] git pushなども自動化(?)
-- [ ] dotfiles for dockerも作ろうかな
-
 Some dotfiles are **disabled** temporary.  
-> .bashrc .ros_setup .vim .vimrc .ycm_extra_conf.py
+>.ros_setup .vim .vimrc .ycm_extra_conf.py
 
 ## Install (Ubuntu)
 Clone this repository onto your home directory.
@@ -79,8 +68,17 @@ $ docker run -it --name dotfile dotfile/test bash
 # make deploy
 ```
 
+## Future work
+- [x] Docker上でテスト
+- [ ] tmux,vimなどをカスタマイズ
+- [ ] dotfilesを`curl -L`コマンドでダウンロード
+- [ ] zshも使ってみたいなあ
+- [ ] マルチプラットフォーム化
+- [ ] ワンコマンドで環境構築
+- [ ] サブモジュール化する
 
 ## References
 1. [common/dotfiles](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/common/dotfiles)
 2. [MotokiKojima/dotfiles](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/MotokiKojima/dotfiles)
 3. [最強の dotfiles 駆動開発と GitHub で管理する運用方法](https://qiita.com/b4b4r07/items/b70178e021bef12cd4a2)
+4. [さいつよのターミナル環境を構築しよう](https://qiita.com/b4b4r07/items/09815eda8ef72e0b472e)

@@ -1,1 +1,1 @@
-ailas  aisl-spc07 = 'ssh aisl@133.15.23.123'
+alias  aisl-spc07='ssh aisl@133.15.23.123'
