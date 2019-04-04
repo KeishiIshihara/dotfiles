@@ -3,15 +3,18 @@ Awesome dotfiles including vim, tex, ros and tmux configs.
 This dotfiles isn't completed yet. 
 
 Some dotfiles are **disabled** temporary.  
->.ros_setup .vim .vimrc .ycm_extra_conf.py
+>.ros_setup .ycm_extra_conf.py
 
-## Install (Ubuntu)
+## Release
+Please refer to [Change log]()  
+version 1.0.0
+
+## Install 
 Clone this repository onto your home directory.
 ```bash
-$ git clone https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles.git ~/dotfiles
+$ git clone -- recursive https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
 $ make init
-# if you're using mac, $ make init_mac
 $ make deploy
 ```
 
@@ -70,10 +73,10 @@ $ docker run -it --name dotfile dotfile/test bash
 
 ## Future work
 - [x] Docker上でテスト
-- [ ] tmux,vimなどをカスタマイズ
+- [x] tmux,vimなどをカスタマイズ
 - [ ] dotfilesを`curl -L`コマンドでダウンロード
-- [ ] zshも使ってみたいなあ
-- [ ] マルチプラットフォーム化
+- [x] zshも使ってみたいなあ
+- [x] マルチプラットフォーム化（ubuntuとmacOSに対応，最初のインストールのみ）
 - [ ] ワンコマンドで環境構築
 - [ ] サブモジュール化する
 

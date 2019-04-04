@@ -3,3 +3,11 @@
 [user]
 	name = KeishiIshihara
 	email = ishihara@aisl.cs.tut.ac.jp
+[core]
+	editor = vim
+[alias]
+	s = status
+	ss = status -s
+	sh = show
+	co = commit
+	

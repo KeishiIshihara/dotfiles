@@ -85,17 +85,31 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+
+## aliases
+# enable color support of ls
+if [ "$(uname)" = 'Darwin' ]; then
+    export LSCOLORS=xbfxcxdxbxegedabagacad
+    alias ls='ls -G'
+else
+    eval `dircolors ~/.colorrc`
+    alias ls='ls --color=auto'
 fi
+
+alias so='source'
+alias sb='source ~/.bashrc'
+alias v='vim'
+alias vi='vim'
+alias vb='vim ~/.bashrc'
+# alias c='cdr'
+# historyに日付を表示
+alias h='fc -lt '%F %T' 1'
+alias cp='cp -i'
+alias rm='rm -i'
+alias mkdir='mkdir -p'
+alias back='pushd'
+# alias diff='diff -U1'
 
 # some more ls aliases
 alias ..='cd ..'
@@ -116,10 +130,7 @@ alias lr='ls -lR'          # Recursive ls
 # alias la='ls -A'
 # alias l='ls -CF'
 
-alias sb='source ~/.bashrc'
 
-alias cp="cp -i"
-alias mv="mv -i"
 
 # # Use if colordiff exists
 # if has 'colordiff'; then
@@ -156,9 +167,9 @@ fi
 
 # source ~/.ros_setup
 source ~/.aisl_ssh_list
-
 ulimit -c unlimited
 
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+
+# PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source ~/.tmuxinator/tmuxinator.bash
-# source ~/.tmuxautorun
+source ~/.tmuxautorun

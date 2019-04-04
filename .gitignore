@@ -4,3 +4,11 @@
 
 # Ignore backup files
 *~
+
+Ricty
+test
+
+# submodule化しても良いがinit時にgit cloneするので
+# git管理しなくよいファイル
+.tmux-powerline
+# fonts
