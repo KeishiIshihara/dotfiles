@@ -6,13 +6,13 @@ Some dotfiles are **disabled** temporary.
 >.ros_setup .ycm_extra_conf.py
 
 ## Release
-Please refer to [Change log]()  
+Please refer to [Change log](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles/blob/master/CHANGELOG.md)  
 version 1.0.0
 
 ## Install 
 Clone this repository onto your home directory.
 ```bash
-$ git clone -- recursive https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles.git ~/dotfiles
+$ git clone --recursive https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
 $ make init
 $ make deploy
@@ -72,7 +72,7 @@ $ docker run -it --name dotfile dotfile/test bash
 ```
 
 ## Future work
-- [x] Docker上でテスト
+- [ ] Docker上でテスト
 - [x] tmux,vimなどをカスタマイズ
 - [ ] dotfilesを`curl -L`コマンドでダウンロード
 - [x] zshも使ってみたいなあ
