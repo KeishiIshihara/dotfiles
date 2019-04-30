@@ -7,8 +7,10 @@
 
 Ricty
 test
+fonts
 
 # submodule化しても良いがinit時にgit cloneするので
 # git管理しなくよいファイル
-.tmux-powerline
+# .tmux-powerline # 追記：オリジナルの設定をこの中に保存するので
+#                 # これもgit管理する
 # fonts

@@ -26,7 +26,7 @@ init_for_ubuntu () {
     sudo gem install -y tmuxinator
     # git clone git://github.com/erikw/tmux-powerline.git ~/tmux-powerline
     git clone git://github.com/erikw/tmux-powerline.git $DOTPATH/.tmux-powerline
-    git clone https://github.com/powerline/fonts.git
+    git clone https://github.com/powerline/fonts.git $DOTPATH/fonts
     bash $DOTPATH/fonts/install.sh
 
     #########################################################################

@@ -18,7 +18,12 @@ function startx() {
 }
 alias ll="ls -al"
 
-if [ -f ~/.bashrc ]; then
+if [ -f ~/.zshrc ]; then
+	source ~/.zshrc
+    echo ".zshrcをsourceしました."
+elif [ -f ~/.bashrc ]; then
 	source ~/.bashrc
+    echo ".bashrcをsourceしました."
 fi
+
 export PATH="/usr/local/bin:$HOME/bin:$PATH"
