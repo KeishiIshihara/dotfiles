@@ -4,8 +4,8 @@
 #http://unskilled.site/tmux%E3%81%A7tmuxinator%E3%82%92%E4%BD%BF%E3%81%86%E6%99%82%E3%81%AE256%E8%89%B2%E5%95%8F%E9%A1%8C/
 tmux_options: -2 -f ~/.tmux.conf
 
-name: dotfiles
-root: ~/dotfiles
+name: ws
+root: ~/workspace
 pre:
     #- cd ~/dotfiles
     #- git pull
@@ -18,7 +18,7 @@ windows:
             -
             - 
             - Avengers:
-                - cat fig/logo4.ansi
+                - cat ~/dotfiles/fig/logo4.ansi
             - htop:
                 - htop
             - archey:

@@ -8,6 +8,7 @@ scriptencoding utf-8
 " 保存時にsudo権限で無理やり保存 (http://qiita.com/yuu_ta/items/30c69798b00560de3b06)
 cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
 
+
 " クリップボードを連携
 set clipboard=unnamed
 

@@ -101,3 +101,4 @@ fi
 export INTERACTIVE_FILTER="fzf:peco:percol:gof:pick"
 
 export DOTPATH=${0:A:h}
+export PATH="$HOME/Library/Python/2.7/bin:$PATH"
