@@ -9,7 +9,7 @@ init_for_ubuntu () {
     ####################################
     ##### Install Shougo/neobundle #####
     ####################################
-    sudo apt-get isntall -y vim
+    sudo apt-get install -y vim
     git clone https://github.com/Shougo/neobundle.vim $DOTPATH/.vim/bundle/neobundle.vim
     # Then, run :NeoBundleInstall on vim to install the other plugins
 
@@ -23,7 +23,7 @@ init_for_ubuntu () {
 
     sudo gem install -y rubygems-update
     sudo update_rubygems
-    sudo gem install -y tmuxinator
+    sudo gem install tmuxinator
     # git clone git://github.com/erikw/tmux-powerline.git ~/tmux-powerline
     git clone git://github.com/erikw/tmux-powerline.git $DOTPATH/.tmux-powerline
     git clone https://github.com/powerline/fonts.git $DOTPATH/fonts
