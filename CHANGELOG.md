@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.0
+2019-10-06
+変更点
+* zsh ファイルを整理
+* 不必要なファイルなどを削除
+
 ## 1.1.0
 Released on 2019-04-30
 変更点
@@ -13,7 +19,6 @@ Released on 2019-04-30
        generate_rc.shを実行し.tmux-powerlinerc.defaultを作成
        その後，.tmux-powerlinercという名前でコピーを作成
 * 今回は.tmux-powerlinercがうまく実行できなかったので，天気の表示などはあきらめた．wifi(自作コマンド)の表示はできた．
-
 
 ## 1.0.0 
 Released on 2019-04-03

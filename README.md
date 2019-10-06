@@ -1,15 +1,13 @@
 # dotfiles
-Awesome dotfiles including vim, tex, ros and tmux configs.  
-This dotfiles isn't completed yet. 
+Cool dotfiles  
 
-Some dotfiles are **disabled** temporary.  
->.ros_setup .ycm_extra_conf.py
 
 ## Release
 Please refer to [Change log](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles/blob/master/CHANGELOG.md)  
-version 1.0.0
+version 2.0
 
-## Install 
+
+## Deploy dotfiles
 Clone this repository onto your home directory.
 ```bash
 $ git clone --recursive https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles.git ~/dotfiles
@@ -18,46 +16,7 @@ $ make init
 $ make deploy
 ```
 
-## Directory structure
-Directory structure is as follows.
-
-```
-.
-├── .tmuxinator
-├── .vim
-├── .etc
-│   └── init
-│       ├── init_for_docker.md
-│       └── init_for_ubuntu.sh
-├── Ricty
-├── Docker
-│   ├── build_command.md
-│   ├── Dockerfile
-│   └── docker-compose.yml
-├── .aisl_ssh_list
-├── .bash_profile
-├── .bashrc
-├── .gitconfig
-├── .gitignore
-├── .latexmkrc
-├── .ros_setup
-├── .tmux-powerlinerc
-├── .tmux.conf
-├── .tmuxautorun
-├── .vimrc
-├── .ycm_extra_conf.py
-├── Makefile
-└── README.md
-```
-
-## Make your own customizations
-Create your dotfile on root directory of this repository.
-```
-$ make deploy
-```
-
-## Test in Docker
-You can test this dotfile on the docker container.
+## Dockerでテストしてみる
 ```
 $ cd Docker
 $ docker build -t dotfile/test .
@@ -71,14 +30,11 @@ $ docker run -it --name dotfile dotfile/test bash
 # make deploy
 ```
 
-## Future work
-- [ ] Docker上でテスト
+## あったら便利な機能とか
 - [x] tmux,vimなどをカスタマイズ
-- [ ] dotfilesを`curl -L`コマンドでダウンロード
-- [x] zshも使ってみたいなあ
+- [x] zsh導入(mac)
 - [x] マルチプラットフォーム化（ubuntuとmacOSに対応，最初のインストールのみ）
-- [ ] ワンコマンドで環境構築
-- [ ] サブモジュール化する
+- [ ] ワンコマンドで環境構築とかしてみたい(`curl -L`コマンド)
 
 ## References
 1. [common/dotfiles](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/common/dotfiles)
