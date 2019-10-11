@@ -1,25 +1,42 @@
 #variables # Now suited to my mac
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .ros_setup .ycm_extra_conf.py .tmux-powerlinerc.default .latexmkrc .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .gitconfig 
+# EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .tmux-powerlinerc.default .latexmkrc .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .gitconfig
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 #command : here are for better understanding
 find_files  = /bin/ls -dF $(val);
 make_symlinks =  ln -sfnv $(abspath $(val)) $(HOME)/$(val);
 
-# .DEFAULT_GOAL := help
-.PHONY : test
+# default target to run
+.DEFAULT_GOAL := list
 
-test:
+# all our targets are phony (no files to check).
+.PHONY : shell show list deploy init init_docker update install help
+
+
+shell: ## Show current os and set EXCLUSIONS
+ifeq  ($(shell uname),Darwin) 
+	@echo 'Hello Mac'
+	$(eval ENV := $(shell uname))
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .vim)
+	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
+else
+	@echo 'Hello Linux'
+	$(eval ENV := $(shell uname))
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .latexmkrc .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .vim)
+	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
+endif
+
+
+show: ## Show all dotfiles
 	@echo $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 	@echo $(wildcard .??*)
 
-list: ## Show dot files in this repo
+list: shell## Show dot files to be deployed
 	@$(foreach val, $(DOTFILES), $(find_files))
-	
-deploy: ## Create symlink to home directory
-	@echo 'Copyright (c) 2013-2015 BABAROT All Rights Reserved.'
+
+deploy: shell ## Create symlink to home directory
 	@echo '==> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), $(make_symlinks))
@@ -39,10 +56,10 @@ update: ## Fetch changes for this repo
 install: update deploy init ## Run make update, deploy, init
 	@exec $$SHELL
 
-clean: ## Remove the dot files and this repo
-	@echo 'Remove dot files in your home directory...'
-	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
-	-rm -rf $(DOTPATH)
+# clean: ## Remove the dot files and this repo
+# 	@echo 'Remove dot files in your home directory...'
+# 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
+# 	-rm -rf $(DOTPATH)
 
 help: ## Self-documented Makefile
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
