@@ -1,0 +1,59 @@
+# ~/.tmuxinator/ros.yml
+
+# Enable vim color scheme on tmuxinator
+#http://unskilled.site/tmux%E3%81%A7tmuxinator%E3%82%92%E4%BD%BF%E3%81%86%E6%99%82%E3%81%AE256%E8%89%B2%E5%95%8F%E9%A1%8C/
+tmux_options: -2 -f ~/.tmux.conf
+
+name: carla
+root: ~/ishihara/workspace/
+pre:
+    #- cd ~/dotfiles
+    #- git pull
+
+
+windows:
+    - Launch:
+        layout: d794,210x51,0,0[211x25,0,0{52x25,0,0[52x18,0,0,6,52x6,0,19,14],52x25,53,0,13,105x25,106,0,12},211x26,0,26{104x26,0,26,7,106x26,105,26,8}]
+        panes:
+            - roscore:
+                - roscore
+            - carlasim:
+                - cd ~/carla_0.8.4/carla/Unreal/CarlaUE4 && ./CarlaUE4.sh
+            - carla-ros-bridge:
+                - cd ~/catkin_ws/src/catkin_ws_for_carla/
+            - htop:
+                - htop
+            - predict:
+                - cd ~/catkin_ws/src/control_predict_model
+            - gpu-status:
+                - nvidia-smi -l 1
+
+    - dataset:
+        layout: d56c,211x52,0,0[211x15,0,0,15,211x14,0,16,25,211x21,0,31{105x21,0,31,20,105x21,106,31,21}]
+        panes:
+            - dataset1:
+                - cd dataset_generation_from_rosbag
+            - dataset2:
+                - cd dataset_generation_from_rosbag
+                # - cd ~/catkin_ws/src
+                # - ls -ltr --ignore='cmakelist*'
+            - dataset3:
+                - cd dataset_generation_from_rosbag
+                - tmux clock-mode
+            - gpu-status:
+                - nvidia-smi -l 1
+    
+    - trian:
+        layout: 815e,211x52,0,0[211x16,0,0,22,211x13,0,17,26,211x21,0,31{105x21,0,31,23,105x21,106,31,24}]
+        panes: 
+            - MTL1:
+                - cd Multi_Task_Learning
+            - MTL2:
+                - cd Multi_Task_Learning
+            - MTL3:
+                - cd Multi_Task_Learning
+            - gpu-status:
+                - nvidia-smi -l 1
+
+
+
