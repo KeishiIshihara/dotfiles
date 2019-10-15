@@ -172,8 +172,8 @@ ulimit -c unlimited
 # source ~/.ros_setup
 
 # ------- pyenv config ----------
-export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 export PATH="$HOME/.pyenv/shims:$PATH"
