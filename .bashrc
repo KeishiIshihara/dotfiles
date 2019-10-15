@@ -56,7 +56,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -85,16 +85,14 @@ xterm*|rxvt*)
     ;;
 esac
 
-
-
 ## aliases
 # enable color support of ls
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=xbfxcxdxbxegedabagacad
     alias ls='ls -G'
-else
-    eval `dircolors ~/.colorrc`
-    alias ls='ls --color=auto'
+# else
+#     eval `dircolors ~/.colorrc`
+#     alias ls='ls --color=auto'
 fi
 
 alias so='source'
@@ -125,10 +123,13 @@ alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
 
-# defalt settings
-# alias ll='ls -alF'
-# alias la='ls -A'
-# alias l='ls -CF'
+
+cdls ()
+{
+    \cd "$@" && ll -h
+}
+alias cd="cdls"
+
 
 # # Use if colordiff exists
 # if has 'colordiff'; then
@@ -136,9 +137,7 @@ alias lr='ls -lR'          # Recursive ls
 # else
 #     alias diff='diff -u'
 # fi
-
-# alias vi="vim"
-
+  
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -147,7 +146,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -163,11 +161,23 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# source ~/.ros_setup
-source ~/.aisl_ssh_list
 ulimit -c unlimited
 
+# -------- Source other configs -----------
+# tmux
+# PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+# source ~/.tmuxinator/tmuxinator.bash
+# source ~/.tmuxautorun
+# source ~/.aisl_ssh_list # aisl ip address
+# source ~/.ros_setup
 
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-source ~/.tmuxinator/tmuxinator.bash
-source ~/.tmuxautorun
+# ------- pyenv config ----------
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+export PATH="$HOME/.pyenv/shims:$PATH"
+
+
+# --------- cuda 10.0 -----------
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
