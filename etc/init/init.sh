@@ -29,6 +29,20 @@ init_for_ubuntu () {
     git clone https://github.com/powerline/fonts.git $DOTPATH/fonts
     bash $DOTPATH/fonts/install.sh
 
+    ##################################
+    #####     Install pyenv      #####
+    ##################################
+    sudo apt install -y zlib1g-dev libssl-dev
+    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    source $DOTPATH/.bashrc
+
+
+    ##################################
+    #####     Install zsh        #####
+    ##################################
+    sudo apt install -y zsh
+    # chsh -s $(which zsh) # change shell bash to zsh # not working
+
     #########################################################################
     ##### Install Ricty font (http://www.rs.tus.ac.jp/yyusa/ricty.html) #####
     #########################################################################
@@ -98,6 +112,14 @@ init_for_mac () {
     # sudo apt-get install latexmk
     # brew install texlive-full
     # brew install latexmk
+
+    ##################################
+    #####     Install pyenv      #####
+    ##################################
+    sudo apt update
+    sudo apt install -y zlib1g-dev libssl-dev
+    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    source $DOTPATH/.bashrc
 
 }
 
