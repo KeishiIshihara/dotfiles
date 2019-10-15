@@ -86,6 +86,9 @@ alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
 
+alias t='tmux ls'
+alias tl='tmux ls'
+alias ta='tmux a'
 
 # ---- frequentry commands' setting -----
 # cdの後にlsを実行
