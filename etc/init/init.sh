@@ -4,7 +4,7 @@ init_for_ubuntu () {
     ##############################
     ##### Install some tools #####
     ##############################
-    sudo apt install -y less net-tools curl git make
+    sudo apt install -y less net-tools curl git make htop
 
     ####################################
     ##### Install Shougo/neobundle #####
@@ -86,7 +86,7 @@ init_for_mac () {
     ##############################
     ##### Install some tools #####
     ##############################
-    brew install less net-tools curl git make 
+    brew install less net-tools curl git make htop
 
     ####################################
     ##### Install Shougo/neobundle #####
