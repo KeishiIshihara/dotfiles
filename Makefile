@@ -1,7 +1,7 @@
 #variables # Now suited to my mac
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .ros_setup .ycm_extra_conf.py .tmux-powerlinerc.default .latexmkrc .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .gitconfig 
+EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .ros_setup .ycm_extra_conf.py .tmux-powerlinerc.default .latexmkrc .bash_profile .zsh .zshenv .zshrc .aisl_ssh_list .gitconfig 
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 #command : here are for better understanding

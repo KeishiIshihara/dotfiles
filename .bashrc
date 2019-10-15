@@ -56,7 +56,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -113,6 +113,7 @@ alias back='pushd'
 
 # some more ls aliases
 alias ..='cd ..'
+alias ...='cd ../..'
 alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
@@ -129,7 +130,6 @@ alias lr='ls -lR'          # Recursive ls
 # alias ll='ls -alF'
 # alias la='ls -A'
 # alias l='ls -CF'
-
 
 
 # # Use if colordiff exists
@@ -173,3 +173,30 @@ ulimit -c unlimited
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source ~/.tmuxinator/tmuxinator.bash
 source ~/.tmuxautorun
+
+
+if [ "$(uname)" = 'Darwin' ]; then
+    echo Hello Mac!
+    # functions
+else
+    echo Hello Ubuntu!
+
+    [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt   #byobu-prompt#
+    export PATH="/usr/local/cuda/bin:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+    source /opt/ros/melodic/setup.bash
+    source ~/catkin_ws/devel/setup.bash
+    export CARLA_ROS_BRIDGE=/home/aisl/carla_0.8.4/carla/carla_ros_bridge
+
+    # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
+    # 'runc' (Docker default) or 'nvidia' (Nvidia Docker 2).
+    export DOCKER_RUNTIME=nvidia
+
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+    fi
+    eval "$(pyenv virtualenv-init -)"
+fi
+
