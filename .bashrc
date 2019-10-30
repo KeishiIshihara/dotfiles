@@ -90,9 +90,9 @@ esac
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=xbfxcxdxbxegedabagacad
     alias ls='ls -G'
-# else
-#     eval `dircolors ~/.colorrc`
-#     alias ls='ls --color=auto'
+else
+    eval `dircolors ~/.colorrc`
+    alias ls='ls --color=auto'
 fi
 
 alias so='source'
@@ -180,7 +180,7 @@ if [ "$(uname)" = 'Darwin' ]; then
     echo Hello Mac!
 elif [ "$(whoami)" = 'aisl' ]; then
     # --------- only aisl pc  -----------
-    echo Hello Ubuntu! on aisl`
+    echo Hello Ubuntu! on aisl
 
     [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt   #byobu-prompt#
     export PATH="/usr/local/cuda/bin:$PATH"
@@ -192,8 +192,9 @@ elif [ "$(whoami)" = 'aisl' ]; then
     # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
     # 'runc' (Docker default) or 'nvidia' (Nvidia Docker 2).
     export DOCKER_RUNTIME=nvidia
-else
+else # [ "$(whoami)" = "keishish" ]; then #
+    # --------- only the pc @ uef machine learning lab  -----------
     # --------- cuda 10.0 (only pc@uef) -----------
-    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
 fi
 
