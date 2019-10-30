@@ -124,6 +124,9 @@ alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
 
+alias t='tmux ls'
+alias tl='tmux ls'
+alias ta='tmux a'
 
 cdls ()
 {
@@ -131,13 +134,6 @@ cdls ()
 }
 alias cd="cdls"
 
-
-# # Use if colordiff exists
-# if has 'colordiff'; then
-#     alias diff='colordiff -u'
-# else
-#     alias diff='diff -u'
-# fi
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -182,9 +178,9 @@ export PATH="$HOME/.pyenv/shims:$PATH"
 
 if [ "$(uname)" = 'Darwin' ]; then
     echo Hello Mac!
-else
+elif [ "$(whoami)" = 'aisl' ]; then
     # --------- only aisl pc  -----------
-    echo Hello Ubuntu!
+    echo Hello Ubuntu! on aisl`
 
     [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt   #byobu-prompt#
     export PATH="/usr/local/cuda/bin:$PATH"
@@ -196,8 +192,8 @@ else
     # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
     # 'runc' (Docker default) or 'nvidia' (Nvidia Docker 2).
     export DOCKER_RUNTIME=nvidia
-
+else
+    # --------- cuda 10.0 (only pc@uef) -----------
+    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
 fi
 
-# --------- cuda 10.0 (only pc@uef) -----------
-# LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
