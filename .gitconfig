@@ -9,5 +9,8 @@
 	s = status
 	ss = status -s
 	sh = show
+	a = add
 	co = commit
+	d = diff
+
 	

@@ -17,7 +17,6 @@ function startx() {
         socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
     fi
 }
-alias ll="ls -al"
 
 if [ -f ~/.zshrc ]; then
 	source ~/.zshrc

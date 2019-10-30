@@ -131,7 +131,6 @@ alias lr='ls -lR'          # Recursive ls
 # alias la='ls -A'
 # alias l='ls -CF'
 
-
 # # Use if colordiff exists
 # if has 'colordiff'; then
 #     alias diff='colordiff -u'

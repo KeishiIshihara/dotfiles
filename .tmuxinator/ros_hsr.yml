@@ -4,30 +4,50 @@
 #http://unskilled.site/tmux%E3%81%A7tmuxinator%E3%82%92%E4%BD%BF%E3%81%86%E6%99%82%E3%81%AE256%E8%89%B2%E5%95%8F%E9%A1%8C/
 tmux_options: -2 -f ~/.tmux.conf
 
-name: ros
-root: ~/catkin_ws/src
+name: ros_hsr
+root: ~/HSR
 pre:
-    #- cd ~/dotfiles
-    #- git pull
-
+    # - cd ~/HSR
+    # - git pull
 
 windows:
-    - Console:
-        layout: tiled
+    - Launch:
+        layout: 9d94,229x57,0,0[230x28,0,0{58x28,0,0[58x14,0,0,9,58x13,0,15,12],59x28,59,0,13,111x28,119,0,14},230x29,0,29{114x29,0,29,15,115x29,115,29,16}]
         panes:
-            - archey
-            - hsrb_mode
-            - archey
-            - hsrb_mode
-            - archey
-            - hsrb_mode
-    - Coding:
-        layout: main-horizontal
+            - roscore:
+                - roscore
+            - launch:
+                - ./RUN-DOCKER-CONTAINER.sh
+                  # - roslaunch hsrb_gazebo_launch hsrb_mock_home_world.launch
+            - carla-ros-bridge: 
+                - ./RUN-DOCKER-CONTAINER.sh
+            - htop:
+                - htop
+            - predict:
+                - ./RUN-DOCKER-CONTAINER.sh
+            - gpu-status:
+                - nvidia-smi -l 1
+
+    - coding1:
+        layout: d56c,211x52,0,0[211x15,0,0,15,211x14,0,16,25,211x21,0,31{105x21,0,31,20,105x21,106,31,21}]
         panes:
-            - vim:
-                - vim
-            - tig:
-                - cd ~/catkin_ws/src
-                - ls -ltr --ignore='cmakelist*'
-
-
+            - pane1:
+                - ./RUN-DOCKER-CONTAINER.sh
+            - pane2:
+                - ./RUN-DOCKER-CONTAINER.sh
+            - pane3:
+                - ./RUN-DOCKER-CONTAINER.sh
+            - gpu-status:
+                - nvidia-smi -l 1
+    
+    - coding2:
+        layout: 815e,211x52,0,0[211x16,0,0,22,211x13,0,17,26,211x21,0,31{105x21,0,31,23,105x21,106,31,24}]
+        panes: 
+            - pane1:
+                - ./RUN-DOCKER-CONTAINER.sh
+            - pane2:
+                - ./RUN-DOCKER-CONTAINER.sh
+            - pane3:
+                - ./RUN-DOCKER-CONTAINER.sh
+            - gpu-status:
+                - nvidia-smi -l 1
