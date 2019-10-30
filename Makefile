@@ -2,7 +2,7 @@
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
 # EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .tmux-powerlinerc.default .latexmkrc .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .gitconfig
-DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+# DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 #command : here are for better understanding
 find_files  = /bin/ls -dF $(val);
@@ -24,7 +24,7 @@ ifeq  ($(shell uname),Darwin)
 else
 	@echo 'Hello Linux'
 	$(eval ENV := $(shell uname))
-	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .latexmkrc .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .vim)
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .latexmkrc .bash_profile .vim)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
 endif
 
@@ -41,7 +41,7 @@ deploy: shell ## Create symlink to home directory
 	@echo ''
 	@$(foreach val, $(DOTFILES), $(make_symlinks))
 
-init: ## Setup environment settings 
+init: ## Setup environment settings
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
 init_docker: ## Setup environment settings 
@@ -53,8 +53,8 @@ update: ## Fetch changes for this repo
 	git submodule update
 	git submodule foreach git pull origin master
 
-install: update deploy init ## Run make update, deploy, init
-	@exec $$SHELL
+# install: update deploy init ## Run make update, deploy, init
+# 	@exec $$SHELL
 
 # clean: ## Remove the dot files and this repo
 # 	@echo 'Remove dot files in your home directory...'

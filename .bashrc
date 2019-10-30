@@ -85,16 +85,14 @@ xterm*|rxvt*)
     ;;
 esac
 
-
-
 ## aliases
 # enable color support of ls
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=xbfxcxdxbxegedabagacad
     alias ls='ls -G'
-else
-    eval `dircolors ~/.colorrc`
-    alias ls='ls --color=auto'
+# else
+#     eval `dircolors ~/.colorrc`
+#     alias ls='ls --color=auto'
 fi
 
 alias so='source'
@@ -126,10 +124,13 @@ alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
 
-# defalt settings
-# alias ll='ls -alF'
-# alias la='ls -A'
-# alias l='ls -CF'
+
+cdls ()
+{
+    \cd "$@" && ll -h
+}
+alias cd="cdls"
+
 
 # # Use if colordiff exists
 # if has 'colordiff'; then
@@ -137,8 +138,6 @@ alias lr='ls -lR'          # Recursive ls
 # else
 #     alias diff='diff -u'
 # fi
-
-# alias vi="vim"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -148,7 +147,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -164,20 +162,28 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# source ~/.ros_setup
-source ~/.aisl_ssh_list
 ulimit -c unlimited
 
+# -------- Source other configs -----------
+# tmux
+# PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+# source ~/.tmuxinator/tmuxinator.bash
+# source ~/.tmuxautorun
+# source ~/.aisl_ssh_list # aisl ip address
+# source ~/.ros_setup
 
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-source ~/.tmuxinator/tmuxinator.bash
-source ~/.tmuxautorun
+# ------- pyenv config ----------
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+export PATH="$HOME/.pyenv/shims:$PATH"
 
 
 if [ "$(uname)" = 'Darwin' ]; then
     echo Hello Mac!
-    # functions
 else
+    # --------- only aisl pc  -----------
     echo Hello Ubuntu!
 
     [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt   #byobu-prompt#
@@ -191,11 +197,7 @@ else
     # 'runc' (Docker default) or 'nvidia' (Nvidia Docker 2).
     export DOCKER_RUNTIME=nvidia
 
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    if command -v pyenv 1>/dev/null 2>&1; then
-        eval "$(pyenv init -)"
-    fi
-    eval "$(pyenv virtualenv-init -)"
 fi
 
+# --------- cuda 10.0 (only pc@uef) -----------
+# LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
