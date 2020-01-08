@@ -20,11 +20,11 @@ windows:
             - carlasim:
                 - cd ~/carla_0.8.4/carla/Unreal/CarlaUE4 && ./CarlaUE4.sh
             - carla-ros-bridge:
-                - cd ~/catkin_ws/src/catkin_ws_for_carla/
+                - cd ~/catkin_ws/src/catkin_ws_for_carla/;
             - htop:
                 - htop
             - predict:
-                - cd ~/catkin_ws/src/control_predict_model
+                -
             - gpu-status:
                 - nvidia-smi -l 1
 
@@ -32,13 +32,11 @@ windows:
         layout: d56c,211x52,0,0[211x15,0,0,15,211x14,0,16,25,211x21,0,31{105x21,0,31,20,105x21,106,31,21}]
         panes:
             - dataset1:
-                - cd dataset_generation_from_rosbag
+                - cd ~/carla_0.8.4/data-collector
             - dataset2:
-                - cd dataset_generation_from_rosbag
-                # - cd ~/catkin_ws/src
-                # - ls -ltr --ignore='cmakelist*'
+                - cd ~/carla_0.8.4/data-collector
             - dataset3:
-                - cd dataset_generation_from_rosbag
+                - cd ~/carla_0.8.4/data-collector
                 - tmux clock-mode
             - gpu-status:
                 - nvidia-smi -l 1
@@ -47,11 +45,11 @@ windows:
         layout: 815e,211x52,0,0[211x16,0,0,22,211x13,0,17,26,211x21,0,31{105x21,0,31,23,105x21,106,31,24}]
         panes: 
             - MTL1:
-                - cd Multi_Task_Learning
+                - code .
             - MTL2:
-                - cd Multi_Task_Learning
+                - 
             - MTL3:
-                - cd Multi_Task_Learning
+                - tmux clock-mode
             - gpu-status:
                 - nvidia-smi -l 1
 

@@ -16,13 +16,18 @@ make_symlinks =  ln -sfnv $(abspath $(val)) $(HOME)/$(val);
 
 
 shell: ## Show current os and set EXCLUSIONS
-ifeq  ($(shell uname),Darwin) 
+ifeq  ($(shell uname),Darwin)
 	@echo 'Hello Mac'
 	$(eval ENV := $(shell uname))
 	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .vim)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
+else ifeq ($(shell whoami), aisl)
+	@echo 'Hello ubuntu @ aisl-tut'
+	$(eval ENV := $(shell uname))
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .latexmkrc .bash_profile .vim .zshenv .zshrc .zsh .aisl_ssh_list)
+	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
 else
-	@echo 'Hello Linux'
+	@echo 'Hello Linux @ uef machine learning lab'
 	$(eval ENV := $(shell uname))
 	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .latexmkrc .bash_profile .vim)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
@@ -44,7 +49,7 @@ deploy: shell ## Create symlink to home directory
 init: ## Setup environment settings
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
-init_docker: ## Setup environment settings 
+init_docker: ## Setup environment settings
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init_for_docker.sh
 
 update: ## Fetch changes for this repo
