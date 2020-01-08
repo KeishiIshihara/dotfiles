@@ -13,6 +13,7 @@
 	sh = show
 	a = add
 	co = commit
+	c = commit
 	d = diff
 
 	
