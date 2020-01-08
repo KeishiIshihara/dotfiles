@@ -90,9 +90,9 @@ esac
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=xbfxcxdxbxegedabagacad
     alias ls='ls -G'
-# else
-#     eval `dircolors ~/.colorrc`
-#     alias ls='ls --color=auto'
+else
+    eval `dircolors ~/.colorrc`
+    alias ls='ls --color=auto'
 fi
 
 alias so='source'
@@ -111,6 +111,7 @@ alias back='pushd'
 
 # some more ls aliases
 alias ..='cd ..'
+alias ...='cd ../..'
 alias ld='ls -ld'          # Show info about the directory
 alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
@@ -123,6 +124,9 @@ alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
 
+alias t='tmux ls'
+alias tl='tmux ls'
+alias ta='tmux a'
 
 cdls ()
 {
@@ -131,13 +135,6 @@ cdls ()
 alias cd="cdls"
 
 
-# # Use if colordiff exists
-# if has 'colordiff'; then
-#     alias diff='colordiff -u'
-# else
-#     alias diff='diff -u'
-# fi
-  
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -179,14 +176,34 @@ eval "$(pyenv init -)"
 export PATH="$HOME/.pyenv/shims:$PATH"
 
 
-# --------- cuda 10.0 -----------
-LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
+if [ "$(uname)" = 'Darwin' ]; then
+    echo Hello Mac!
+elif [ "$(whoami)" = 'aisl' ]; then
+    # --------- only aisl pc  -----------
+    echo Hello Ubuntu! on aisl
 
+    [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt #byobu-prompt#
+    # ------ CUDA ----------
+    export PATH="/usr/local/cuda/bin:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
-# ------- ROS ----------
-# It's convenient if the ROS environment variables are automatically added 
-# to your bash session every time a new shell is launched. (only if using Linux)
-if [ "$(uname)" = 'Linux' ]; then
+    # ------- ROS ----------
+    # It's convenient if the ROS environment variables are automatically added 
+    # to your bash session every time a new shell is launched. (only if using Linux)
     source /opt/ros/melodic/setup.bash
+    source ~/catkin_ws/devel/setup.bash
+    export CARLA_ROS_BRIDGE=/home/aisl/carla_0.8.4/carla/carla_ros_bridge
+
+    # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
+    # 'runc' (Docker default) or 'nvidia' (Nvidia Docker 2).
+    export DOCKER_RUNTIME=nvidia
+else # [ "$(whoami)" = "keishish" ]; then #
+    # --------- only the pc @ uef machine learning lab  -----------
+    # --------- cuda 10.0 (only pc@uef) -----------
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
+
+    # ------- ROS ----------
+    source /opt/ros/melodic/setup.bash
+    source ~/catkin_ws/devel/setup.bash
 fi
 

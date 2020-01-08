@@ -181,13 +181,6 @@ source ~/.tmuxinator/tmuxinator.zsh
 # aisl ip address
 source ~/.aisl_ssh_list
 
-# ------ selfmade commands -------
-# tex compile command
-function latex() {
-    platex $1.tex &&
-    dvipdfmx -p $2 $1.dvi &&
-    open $1.pdf &&
-}
 
 # ------- pyenv config ----------
 export PYENV_ROOT="$HOME/.pyenv"
@@ -197,13 +190,44 @@ eval "$(pyenv init -)"
 # export PATH="$HOME/.pyenv/shims:$PATH"
 
 
-# ------- ROS ----------
-# It's convenient if the ROS environment variables are automatically added 
-# to your bash session every time a new shell is launched. (only if using Linux)
-if [ "$(uname)" = 'Linux' ]; then
+
+if [ "$(uname)" = 'Darwin' ]; then
+    echo Hello Mac!
+    # ------ selfmade commands -------
+    # tex compile command
+    function latex() {
+        platex $1.tex &&
+        dvipdfmx -p $2 $1.dvi &&
+        open $1.pdf &&
+    }
+
+elif [ "$(whoami)" = 'aisl' ]; then
+    # --------- only aisl pc  -----------
+    echo Hello Ubuntu! on aisl
+
+    [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt #byobu-prompt#
+    # ------ CUDA ----------
+    export PATH="/usr/local/cuda/bin:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+
+    # ------- ROS ----------
+    # It's convenient if the ROS environment variables are automatically added 
+    # to your bash session every time a new shell is launched. (only if using Linux)
     source /opt/ros/melodic/setup.zsh
+    source ~/catkin_ws/devel/setup.zsh
+    export CARLA_ROS_BRIDGE=/home/aisl/carla_0.8.4/carla/carla_ros_bridge
+
+    # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
+    # 'runc' (Docker default) or 'nvidia' (Nvidia Docker 2).
+    export DOCKER_RUNTIME=nvidia
+else # [ "$(whoami)" = "keishish" ]; then #
+    # --------- only the pc @ uef machine learning lab  -----------
+    # --------- cuda 10.0 (only pc@uef) -----------
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
+
+    # ------- ROS ----------
+    # It's convenient if the ROS environment variables are automatically added 
+    # to your bash session every time a new shell is launched. (only if using Linux)
+    source /opt/ros/melodic/setup.zsh
+    source ~/catkin_ws/devel/setup.zsh
 fi
-
-
-# --------- cuda 10.0 -----------
-LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
