@@ -3,6 +3,8 @@
 [user]
 	name = KeishiIshihara
 	email = ishihara@aisl.cs.tut.ac.jp
+	# name = keishish
+	# email = keishish@student.uef.fi
 [core]
 	editor = vim
 [alias]
