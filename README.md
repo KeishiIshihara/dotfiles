@@ -16,7 +16,18 @@ $ make init
 $ make deploy
 ```
 
-## Dockerでテストしてみる
+## Primary commands
+This dotfile mostly runs with `make`. See `make help` for more info.
+```bash
+$ make shell   # show current os or env and set EXCLUSIONS
+$ make list    # show dot files to be deployed
+$ make deploy  # create symbolic link to home directory
+$ make show    # show all dot files
+$ make init    # setup environmental settings
+```
+
+## Testing on Docker (not confirmed)
+for more checking purpose in advance.
 ```
 $ cd Docker
 $ docker build -t dotfile/test .
@@ -33,8 +44,8 @@ $ docker run -it --name dotfile dotfile/test bash
 ## あったら便利な機能とか
 - [x] tmux,vimなどをカスタマイズ
 - [x] zsh導入(mac)
-- [x] マルチプラットフォーム化（ubuntuとmacOSに対応，最初のインストールのみ）
-- [ ] ワンコマンドで環境構築とかしてみたい(`curl -L`コマンド)
+- [x] マルチプラットフォーム化（aisl, mllab, macOSに対応）
+- [ ] ワンコマンド環境構築(`curl -L`コマンド)
 
 ## References
 1. [common/dotfiles](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/common/dotfiles)

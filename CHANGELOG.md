@@ -5,6 +5,7 @@
 変更点
 * zsh ファイルを整理
 * 不必要なファイルなどを削除
+* PCs on mllab,aisl,mac are available (only bash or zsh)
 
 ## 1.1.0
 Released on 2019-04-30
