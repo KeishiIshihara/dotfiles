@@ -127,6 +127,6 @@ if [ "$(uname)" = 'Darwin' ]; then
     echo Hello Mac!
     init_for_mac
 else
-    echo Hello Ubuntu!
+    echo Hello Ubuntu! You are supposed to be Ubuntu
     init_for_ubuntu
 fi
