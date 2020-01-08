@@ -195,3 +195,15 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 # export PATH="$HOME/.pyenv/shims:$PATH"
+
+
+# ------- ROS ----------
+# It's convenient if the ROS environment variables are automatically added 
+# to your bash session every time a new shell is launched. (only if using Linux)
+if [ "$(uname)" = 'Linux' ]; then
+    source /opt/ros/melodic/setup.zsh
+fi
+
+
+# --------- cuda 10.0 -----------
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"

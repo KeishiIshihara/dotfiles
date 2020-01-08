@@ -181,3 +181,12 @@ export PATH="$HOME/.pyenv/shims:$PATH"
 
 # --------- cuda 10.0 -----------
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
+
+
+# ------- ROS ----------
+# It's convenient if the ROS environment variables are automatically added 
+# to your bash session every time a new shell is launched. (only if using Linux)
+if [ "$(uname)" = 'Linux' ]; then
+    source /opt/ros/melodic/setup.bash
+fi
+
