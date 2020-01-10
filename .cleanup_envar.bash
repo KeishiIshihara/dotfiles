@@ -6,7 +6,7 @@
 #       source .cleanup_envar.bash
 #
 #  Then finish!   
-#
+#  Note that this is for only linux os currently.
 #
 #  (c) Keishi Ishihara
 # ----------------------------------------------------------------
