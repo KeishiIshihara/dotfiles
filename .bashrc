@@ -213,5 +213,6 @@ fi
 # env variable (export) should be written in .bash_profile or .zprofile or .zshenv
 
 # Cleanup enery single Env Variables
-source .cleanup_envar.bash
+source ~/.cleanup_envar.bash
 
+echo "sucessfully sourced .bashrc"

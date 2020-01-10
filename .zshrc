@@ -232,7 +232,7 @@ else # [ "$(whoami)" = "keishish" ]; then #
     source ~/catkin_ws/devel/setup.zsh
 
     # ------ Carla Client ------
-    export PYTHONPATH="$PYTHONPATH:/home/keishish/ishihara/carla-0.8.4/PythonClient/carla"
+    # export PYTHONPATH="$PYTHONPATH:/home/keishish/ishihara/carla-0.8.4/PythonClient/carla"
 fi
 
 
@@ -257,5 +257,6 @@ unset __conda_setup
 # env variable (export) should be written in .bash_profile or .zprofile or .zshenv
 
 # Cleanup enery single Env Variables
-source .cleanup_envar.bash
+source ~/.cleanup_envar.bash
 
+echo "sucessfully sourced .zshrc"
