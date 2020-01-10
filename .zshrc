@@ -230,4 +230,32 @@ else # [ "$(whoami)" = "keishish" ]; then #
     # to your bash session every time a new shell is launched. (only if using Linux)
     source /opt/ros/melodic/setup.zsh
     source ~/catkin_ws/devel/setup.zsh
+
+    # ------ Carla Client ------
+    export PYTHONPATH="$PYTHONPATH:/home/keishish/ishihara/carla-0.8.4/PythonClient/carla"
 fi
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/keishish/.pyenv/versions/miniconda3-4.3.30/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/keishish/.pyenv/versions/miniconda3-4.3.30/etc/profile.d/conda.sh" ]; then
+        . "/home/keishish/.pyenv/versions/miniconda3-4.3.30/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/keishish/.pyenv/versions/miniconda3-4.3.30/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+## TIPS
+# alias, source, and shell variable should be written this file (.bashrc or .zshrc)
+# env variable (export) should be written in .bash_profile or .zprofile or .zshenv
+
+# Cleanup enery single Env Variables
+source .cleanup_envar.bash
+

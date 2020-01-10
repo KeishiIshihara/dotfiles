@@ -207,3 +207,11 @@ else # [ "$(whoami)" = "keishish" ]; then #
     source ~/catkin_ws/devel/setup.bash
 fi
 
+
+## TIPS
+# alias, source, and shell variable should be written this file (.bashrc or .zshrc)
+# env variable (export) should be written in .bash_profile or .zprofile or .zshenv
+
+# Cleanup enery single Env Variables
+source .cleanup_envar.bash
+
