@@ -18,6 +18,8 @@ function startx() {
     fi
 }
 
+export PATH="/usr/local/bin:$HOME/bin:$PATH"
+
 if [ -f ~/.zshrc ]; then
 	source ~/.zshrc
     echo ".zshrcをsourceしました."
@@ -26,4 +28,3 @@ elif [ -f ~/.bashrc ]; then
     echo ".bashrcをsourceしました."
 fi
 
-export PATH="/usr/local/bin:$HOME/bin:$PATH"
