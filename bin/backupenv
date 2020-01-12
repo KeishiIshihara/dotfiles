@@ -1,0 +1,70 @@
+#!/bin/bash
+
+version=1.0
+VARBOSE=0
+
+
+
+#----------------------------
+##### Process arguments #####
+
+usage_exit() {
+        echo "Usage: $0 [-v] [-r] [-h]" 1>&2
+        echo
+        echo "   This script makes backup of Environment Variables"
+        echo "   before cleaning up current EV or sourcing .zshrc or similar."
+        echo 
+        echo "Options:"
+        echo "  -h, show this help"
+        echo "      --version: "$version
+        echo "  -v, varbose mode"
+        echo "  -b, remove all backup files and backup folder"
+        echo
+        exit 1
+}
+
+not_supported_yet_exit() {
+        echo " This option is not supported yet."
+        exit 1
+}
+
+while getopts hrv OPT
+do
+    case $OPT in
+        v)  VARBOSE=1 ;;
+        r)  not_supported_yet_exit ;;
+        h)  usage_exit ;;
+        \?) usage_exit ;;
+    esac
+done
+
+shift $((OPTIND - 1)) # This probably clears rest of args
+
+
+
+#----------------------------------
+##### Command definition here #####
+
+## assert $DOTPATH -eq $HOME/dotfile
+
+if [ $VARBOSE -eq 1 ]; then echo 'previous EnVar list was stored at backup folder'; fi
+
+# dotfileのroot directoryを取得
+if [ $VARBOSE -eq 1 ]; then echo '   directory path: '$DOTPATH; fi
+
+# backup directory path
+BACKUP_DIR=$DOTPATH'/envar_backup'
+
+# envar_backupフォルダがなければ作成
+if [ ! -e $BACKUP_DIR ]; then 
+    mkdir -p $BACKUP_DIR
+    if [ $VARBOSE -eq 1 ]; then echo '   backup folder was created.'; fi
+else
+    if [ $VARBOSE -eq 1 ]; then echo '   backup folder already exists.'; fi
+fi
+
+# 現在のEnvironment Variablesを記録
+printenv > $BACKUP_DIR/envar_backup.`date "+%Y%m%d_%H%M%S"`
+
+
+
