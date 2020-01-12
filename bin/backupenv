@@ -48,6 +48,11 @@ shift $((OPTIND - 1)) # This probably clears rest of args
 ##### Command definition here #####
 
 ## assert $DOTPATH -eq $HOME/dotfile
+if [ ! -d $DOTPATH ]; then
+    echo "$DOTPATH: not found"
+    exit 1
+# else; echo $DOTPATH': to be used as dotfiles root.'
+fi
 
 if [ $VARBOSE -eq 1 ]; then echo 'previous EnVar list was stored at backup folder'; fi
 
