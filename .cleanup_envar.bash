@@ -99,7 +99,7 @@ else
     is_successed=0
 fi
 
-if [ $is_successed == 1 ]; then
+if [ $is_successed = 1 ]; then
     echo 'Congrats! Cleaned up every single env variables'\'' name!'
     echo '(Please ignore if Runtime error occured from awk command)'
 else
