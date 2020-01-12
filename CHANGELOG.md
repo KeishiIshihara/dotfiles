@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.1
+2020-01-11
+Change log
+* Solved messy environment path problem
+* `backup_envar` command
+
+
 ## 2.0
 2019-10-06
 変更点
