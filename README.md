@@ -1,19 +1,20 @@
 # dotfiles
 Cool dotfiles  
-This dotfile was mainly made based on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles)
+This dotfile is made based on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles)
 
-## Release
+### Release
 Please refer to [Change log](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles/blob/master/CHANGELOG.md)  
 version 2.1
 
 ### TODO:
 - [ ] Installing test in an unseen environment.
-- [ ] Cleaning up test of this whole dotfile.
+- [ ] Cleaning up test of this whole dotfile. 
+- [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 
 ## Install and deploy dotfiles
 Clone this repository onto your home directory.
 ```bash
-# This name should be '~/dotfile', not '~/.dotfile'
+# Note that this dotfiles project should be named as '~/dotfile', not '~/.dotfile'
 $ git clone --recursive https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
 $ make init
@@ -21,7 +22,7 @@ $ make deploy
 ```
 
 ## Primary commands
-This dotfile mostly runs with `make`. See `make help` for more info.
+This dotfiles mostly go with `make` command. See `make help` for more info. Here is frequently used commands.
 ```bash
 $ make shell   # show current os or env and set EXCLUSIONS
 $ make list    # show dot files to be deployed
@@ -30,7 +31,7 @@ $ make show    # show all dot files
 $ make init    # setup environmental settings
 ```
 
-## Testing on Docker (not confirmed)
+### Testing on Docker (not confirmed)
 for more checking purpose in advance.
 ```
 $ cd Docker
@@ -45,9 +46,15 @@ $ docker run -it --name dotfile dotfile/test bash
 # make deploy
 ```
 
-## あったら便利な機能とか
-- [x] tmux,vimなどをカスタマイズ
-- [x] zsh導入(mac)
+## Troubleshooting 
+Backspace not working when you're asked username or password in shell, just do:
+```bash
+$ stty erase "^?"
+```
+
+
+#### あったら便利な機能とか
+- [x] zsh導入(mac), 
 - [x] マルチプラットフォーム化（aisl, mllab, macOSに対応）
 - [ ] ワンコマンド環境構築(`curl -L`コマンド)
 
