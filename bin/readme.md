@@ -1,11 +1,11 @@
 ## self made commands
 
-- tmuxx
+- tmuxx  
 ターミナルを立ち上げた際のtmuxセッションの自動立ち上げ
 
-- backupenv
+- backupenv  
 環境変数のバックアップを作成する．
 rcファイル内でpathを全て整理する際に念のために事前にバックアップを取る用．
 
-- latex: TeX compile command
+- latex: TeX compile command  
 .texファイルをコンパイルして.pdfファイルを生成
