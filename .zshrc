@@ -17,6 +17,8 @@ export PATH="$HOME/bin:$PATH"
 
 # dotfileのパス
 export DOTPATH=$HOME'/dotfiles'
+export PATH="$DOTPATH/bin:$PATH"
+
 
 
 # 色を使用
@@ -203,12 +205,12 @@ eval "$(pyenv init -)"
 if [ "$(uname)" = 'Darwin' ]; then
     echo Hello Mac!
     # ------ selfmade commands -------
-    # tex compile command
-    function latex() {
-        platex $1.tex &&
-        dvipdfmx -p $2 $1.dvi &&
-        open $1.pdf &&
-    }
+    # # tex compile command
+    # function latex() {
+    #     platex $1.tex &&
+    #     dvipdfmx -p $2 $1.dvi &&
+    #     open $1.pdf &&
+    # }
 
 elif [ "$(whoami)" = 'aisl' ]; then
     # --------- only aisl pc  -----------
@@ -223,7 +225,7 @@ elif [ "$(whoami)" = 'aisl' ]; then
     # It's convenient if the ROS environment variables are automatically added 
     # to your bash session every time a new shell is launched. (only if using Linux)
     source /opt/ros/melodic/setup.zsh
-    source ~/catkin_ws/devel/setup.zsh
+    source ~/catkin_ws/develtup.zsh
     export CARLA_ROS_BRIDGE=/home/aisl/carla_0.8.4/carla/carla_ros_bridge
 
     # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
@@ -259,6 +261,8 @@ else # [ "$(whoami)" = "keishish" ]; then #
     unset __conda_setup
     # <<< conda initialize <<<
 fi
+
+
 
 ## TIPS
 # alias, source, and shell variable should be written this file (.bashrc or .zshrc)
