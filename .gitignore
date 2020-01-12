@@ -1,3 +1,5 @@
+.DS_Store
+
 # Retain bundle folder for vim plugins
 .vim/bundle/*
 !.vim/bundle/.gitkeep
@@ -17,5 +19,5 @@ fonts
 
 maketest.mk
 backup
-
 envar_backup
+tex_test
