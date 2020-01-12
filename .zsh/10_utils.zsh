@@ -47,11 +47,14 @@ is_ssh_running() {
     [[ -n $SSH_CLIENT ]]
 }
 
+
+##CHECKED##
 # ostype returns the lowercase OS name
 ostype() {
     echo ${(L):-$(uname)}
 }
 
+##CHECKED##
 # os_detect export the PLATFORM variable as you see fit
 os_detect() {
     export PLATFORM
@@ -62,7 +65,7 @@ os_detect() {
         *)          PLATFORM='unknown' ;;
     esac
 }
-
+##CHECKED##
 # is_osx returns true if running OS is Macintosh
 is_osx() {
     os_detect
@@ -73,7 +76,7 @@ is_osx() {
     fi
 }
 alias is_mac=is_osx
-
+##CHECKED##
 # is_linux returns true if running OS is GNU/Linux
 is_linux() {
     os_detect
@@ -83,7 +86,7 @@ is_linux() {
         return 1
     fi
 }
-
+##CHECKED##
 # is_bsd returns true if running OS is FreeBSD
 is_bsd() {
     os_detect
