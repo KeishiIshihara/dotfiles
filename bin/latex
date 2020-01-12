@@ -1,0 +1,117 @@
+#!/bin/bash
+#==========================
+#  TeX compile command
+#
+#   (c) keishi
+#==========================
+###
+### Requirements: TeX Live 201* (2019 is recomended)
+###  - platex
+###  - dvipdfmx
+###
+
+version=1.0
+VARBOSE=0
+
+PAPER_SIZE=-1
+REMOVE_TARGET="*.aux *.bbl *.blg *.dvi *.fdb_latexmk *.fls *.log *.synctex.gz *.toc"
+
+usage_exit() {
+        echo "Usage: $0 [-h] [-s size] item" 1>&2
+        echo "   This command compiles tex source, produce .pdf, and open it."
+        echo "   Do not add .tex at last of the item name" 
+        echo
+        echo "Options:"
+        echo "  -h, show this help"
+        echo "      --version: "$version
+        echo "  -s size, set papersize [a4]"
+        echo
+        echo "  -r, remove unnecessary files"
+        echo "      target: *.aux *.bbl *.blg *.dvi *.fdb_latexmk *.fls *.log *.synctex.gz *.toc"
+        echo
+        exit 1
+}
+
+not_supported_yet_exit() {
+        echo " This option is not supported yet."
+        exit 1
+}
+
+not_supported_os_exit() {
+        echo " This os is not supported yet."
+        exit 1
+}
+
+remove_unnecessary_files_exit() {
+    echo "These files will be deleted."
+    ls -1 $REMOVE_TARGET 2> /dev/null
+    echo
+    read -p "ok? (y/N): " yn
+    case "$yn" in [yY]*) ;; *) echo "abort." ; exit ;; esac
+    rm -f $REMOVE_TARGET
+    echo "Successfully deleted."
+    exit 1
+}
+
+while getopts hrs: OPT
+do
+    case $OPT in
+        r) remove_unnecessary_files_exit ;;
+        s) PAPER_SIZE=$OPTARG ;;
+        h)  usage_exit ;;
+        \?) usage_exit ;;
+    esac
+done
+
+shift $((OPTIND - 1)) # This probably clears rest of args
+
+
+# [WARNING] OSX is only now avairable
+if [ ! "$(uname)" = 'Darwin' ]; then
+    echo '(now this command is avairable on only OSX..)'
+    not_supported_os_exit
+else
+    echo '(now this command is avairable on only OSX..)'
+fi
+
+# [WARNING] if item is not specified
+if [ -z $1 ]; then
+    usage_exit
+fi
+
+# Remove .tex letters from source file
+TEX_FILE=$(echo $1 | sed s/.tex//g)
+echo $TEX_FILE
+
+# Compile, make .pdf, and open it
+if [ $PAPER_SIZE = -1 ]; then 
+    # case: paper size is not specified
+    echo "$PAPER_SIZE: paper size not found"
+    echo
+    echo "[Command]: platex $TEX_FILE.tex"
+    echo
+    platex $TEX_FILE.tex
+    echo
+    echo "[Command]: edvipdfmx $TEX_FILE.dvi"
+    echo
+    dvipdfmx $TEX_FILE.dvi
+    echo
+    echo 'Now opening pdf..'
+    open $TEX_FILE.pdf
+else 
+    # case: paper size is specified
+    echo "Paper size is set as: $PAPER_SIZE"
+    echo
+    echo "[Command]: platex $TEX_FILE.tex"
+    echo
+    platex $TEX_FILE.tex
+    echo
+    echo "[Command]: dvipdfmx $TEX_FILE.dvi"
+    echo
+    dvipdfmx -p $PAPER_SIZE $TEX_FILE.dvi
+    echo
+    echo 'Now opening pdf..'
+    open $TEX_FILE.pdf
+fi
+
+echo
