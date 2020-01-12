@@ -11,6 +11,7 @@ version 2.1
 - [ ] Cleaning up test of this whole dotfile. 
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 - [ ] Maintain pyenv's versions and each requirements lists.
+- [ ] Pyenv install script
 
 ## Install and deploy dotfiles
 Clone this repository onto your home directory.
@@ -52,7 +53,15 @@ Backspace not working when you're asked username or password in shell, just do:
 ```bash
 $ stty erase "^?"
 ```
-
+Remove selfmade functions or aliases
+```bash
+# alias
+$ unalias alias-name
+$ alias # show alias list
+# self-made function
+$ unfunction func-name
+$ which func-name # show self-made function
+```
 
 #### あったら便利な機能とか
 - [x] zsh導入(mac), 
