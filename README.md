@@ -10,6 +10,7 @@ version 2.1
 - [ ] Installing test in an unseen environment.
 - [ ] Cleaning up test of this whole dotfile. 
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
+- [ ] Maintain pyenv's versions and each requirements lists.
 
 ## Install and deploy dotfiles
 Clone this repository onto your home directory.
