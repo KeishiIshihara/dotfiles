@@ -3,7 +3,7 @@ Cool dotfiles
 This dotfile is made based on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles), [aisl common/dotfiles](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/common/dotfiles)
 
 ### Release
-Please refer to [Change log](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles/blob/master/CHANGELOG.md)  
+Please refer to [change log](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles/blob/master/CHANGELOG.md) for more info.  
 version 2.1
 
 ### TODO:
