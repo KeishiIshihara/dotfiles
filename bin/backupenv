@@ -3,6 +3,8 @@
 version=1.0
 VARBOSE=0
 
+# TODO:
+# - [ ] Implement auto remove backup files function; those will increase soon easily
 
 
 #----------------------------
