@@ -15,6 +15,11 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# path to dotfiles directory
+# export DOTPATH=$(git rev-parse --show-toplevel)
+export DOTPATH=$HOME'/dotfiles'
+
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;

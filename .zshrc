@@ -1,3 +1,8 @@
+############
+#  .zshrc  #
+############
+
+
 # ---- basic configs ------
 # source ~/.bashrc
 
@@ -9,6 +14,10 @@ export LANG=ja_JP.UTF-8
 
 # パスを追加したい場合
 export PATH="$HOME/bin:$PATH"
+
+# dotfileのパス
+export DOTPATH=$HOME'/dotfiles'
+
 
 # 色を使用
 autoload -Uz colors
@@ -232,31 +241,32 @@ else # [ "$(whoami)" = "keishish" ]; then #
     source ~/catkin_ws/devel/setup.zsh
 
     # ------ Carla Client ------
-    # export PYTHONPATH="$PYTHONPATH:/home/keishish/ishihara/carla-0.8.4/PythonClient/carla"
-fi
+    export PYTHONPATH="$PYTHONPATH:/home/keishish/ishihara/carla-0.8.4/PythonClient/carla"
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/keishish/.pyenv/versions/miniconda3-4.3.30/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/keishish/.pyenv/versions/miniconda3-4.3.30/etc/profile.d/conda.sh" ]; then
-        . "/home/keishish/.pyenv/versions/miniconda3-4.3.30/etc/profile.d/conda.sh"
+    # -------- Conda ---------
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/home/keishish/.pyenv/versions/miniconda3-4.3.30/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/home/keishish/.pyenv/versions/miniconda3-4.3.30/bin:$PATH"
+        if [ -f "/home/keishish/.pyenv/versions/miniconda3-4.3.30/etc/profile.d/conda.sh" ]; then
+            . "/home/keishish/.pyenv/versions/miniconda3-4.3.30/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/keishish/.pyenv/versions/miniconda3-4.3.30/bin:$PATH"
+        fi
     fi
+    unset __conda_setup
+    # <<< conda initialize <<<
 fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 
 ## TIPS
 # alias, source, and shell variable should be written this file (.bashrc or .zshrc)
 # env variable (export) should be written in .bash_profile or .zprofile or .zshenv
 
 # Cleanup enery single Env Variables
+eval $DOTPATH/bin/backupenv # make backup of current env
 source ~/.cleanup_envar.bash
 
 echo "sucessfully sourced .zshrc"
+
