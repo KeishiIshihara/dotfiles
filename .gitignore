@@ -21,3 +21,4 @@ maketest.mk
 backup
 envar_backup
 tex_test
+colortest
