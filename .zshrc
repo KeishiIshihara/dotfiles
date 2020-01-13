@@ -97,6 +97,7 @@ alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
 
+alias tm='tmux'
 alias t='tmux ls'
 alias tl='tmux ls'
 alias ta='tmux a'
@@ -202,7 +203,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 # export PATH="$HOME/.pyenv/shims:$PATH"
-
 
 
 if [ "$(uname)" = 'Darwin' ]; then
