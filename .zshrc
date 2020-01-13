@@ -59,7 +59,7 @@ setopt pushd_ignore_dups
 # setopt correct  ## currently disalbed
 
 # backspace,deleteキーを使えるように
-stty erase ^H
+stty erase "^?"
 bindkey "^[[3~" delete-char
 
 
@@ -103,7 +103,7 @@ alias ta='tmux a'
 
 # ---- frequentry commands' setting -----
 # cdの後にlsを実行
-chpwd() { ls -lF }
+chpwd() { ls -lF --color=auto }
 
 # mkdirとcdを同時実行
 function mkcd() {
@@ -129,11 +129,14 @@ setopt no_flow_control
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=xbfxcxdxbxegedabagacad
     alias ls='ls -G'
-else
-   # eval `dircolors ~/.colorrc`
-   # alias ls='ls --color=auto'
+elif [ "$(uname)" = 'Linux' ]; then
+    eval `dircolors ~/.colorrc`
+    alias ls='ls --color=auto'
 fi
 
+if [ -n "$LS_COLORS" ]; then
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fi
 
 # -------- completion & history ----------
 # 補完後、メニュー選択モードになり左右キーで移動が出来る
