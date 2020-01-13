@@ -203,7 +203,7 @@ eval "$(pyenv init -)"
 
 
 if [ "$(uname)" = 'Darwin' ]; then
-    echo Hello Mac!
+    echo "Hello Mac!"
     # ------ selfmade commands -------
     # # tex compile command
     # function latex() {
@@ -214,7 +214,7 @@ if [ "$(uname)" = 'Darwin' ]; then
 
 elif [ "$(whoami)" = 'aisl' ]; then
     # --------- only aisl pc  -----------
-    echo Hello Ubuntu! on aisl
+    echo "Hello Ubuntu! on aisl"
 
     [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt #byobu-prompt#
     # ------ CUDA ----------
@@ -233,6 +233,8 @@ elif [ "$(whoami)" = 'aisl' ]; then
     export DOCKER_RUNTIME=nvidia
 else # [ "$(whoami)" = "keishish" ]; then #
     # --------- only the pc @ uef machine learning lab  -----------
+    echo "Hello Ubuntu! (KDE neon 5.17)"
+
     # --------- cuda 10.0 (only pc@uef) -----------
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
 
