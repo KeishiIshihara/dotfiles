@@ -1,0 +1,118 @@
+#!/bin/bash
+#==============================
+#  Print Envar to read easily
+#
+#   (c) keishi
+#==============================
+###
+### Requirements: 
+###  - 
+###  - 
+###
+
+version=1.0
+VARBOSE=0
+
+PAPER_SIZE=-1
+CLEANUP=-1
+
+usage_exit() {
+        echo "Usage: $0 [-h] EnVar-name" 1>&2
+        echo "   This command prints environment path to read easily"
+        echo
+        echo "Options:"
+        echo "  -h, show this help"
+        echo "      --version: "$version
+        echo "  -c, clean up and show"
+        echo
+        exit 1
+}
+
+not_supported_yet_exit() {
+        echo " This option is not supported yet."
+        exit 1
+}
+
+not_supported_os_exit() {
+        echo " This os is not supported yet."
+        exit 1
+}
+
+arg_not_passed_error_exit() {
+        echo "Please enter environment variable you want to see"
+        echo
+        usage_exit
+}
+
+os_detect() {
+    if [ "$(whoami)" = 'ishiharakeishi' ]; then
+        # export PLATFORM
+        PLATFORM='osx'
+    elif [ "$(whoami)" = 'keishish' ]; then
+        PLATFORM='dluef-kde'
+    elif [ "$(whoami)" = 'aisl' ]; then
+        PLATFORM='aisl-pc'
+    else
+        PLATFORM='unknown'
+    fi
+}
+
+cleanup() {
+    os_detect
+    echo 'shoe with cleaning up passed variable'
+    if [ $PLATFORM = 'dluef-kde' ]; then
+        # new_path=$(echo $1 | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+        # command="export $(echo $1)=\"$new_path\""
+        # eval $command
+        not_supported_yet_exit
+        is_successed=1
+    fi
+    echo
+}
+
+remove_unnecessary_files_exit() {
+    echo "These files will be deleted."
+    not_supported_yet_exit
+    exit 1
+}
+
+while getopts chrs: OPT
+do
+    case $OPT in
+        # r) remove_unnecessary_files_exit ;;
+        # s) PAPER_SIZE=$OPTARG ;;
+        c)  CLEANUP=1 ;;
+        h)  usage_exit ;;
+        \?) usage_exit ;;
+    esac
+done
+
+shift $((OPTIND - 1)) # This probably clears rest of args
+
+
+
+# [WARNING] if item is not specified
+if [ -z $1 ]; then
+    arg_not_passed_error_exit
+fi
+
+if [ $CLEANUP = 1 ]; then
+    cleanup
+fi
+
+echo $1 | tr ':' '\n'
+
+
+# # [WARNING] OSX is only now avairable
+# if [ ! "$(uname)" = 'Darwin' ]; then
+#     echo '(now this command is avairable on only OSX..)'
+#     not_supported_os_exit
+# else
+#     echo '(now this command is avairable on only OSX..)'
+# fi
+
+# # Remove .tex letters from source file
+# TEX_FILE=$(echo $1 | sed s/.tex//g)
+# echo $TEX_FILE
+
+echo
