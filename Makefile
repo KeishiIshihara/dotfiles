@@ -19,7 +19,7 @@ shell: ## Show current os and set EXCLUSIONS
 ifeq  ($(shell uname),Darwin)
 	@echo 'Hello Mac'
 	$(eval ENV := $(shell uname))
-	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .vim)
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .vim .colorrc)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
 else ifeq ($(shell whoami), aisl)
 	@echo 'Hello ubuntu @ aisl-tut'
