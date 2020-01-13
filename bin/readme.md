@@ -9,3 +9,7 @@ rcファイル内でpathを全て整理する際に念のために事前にバ�
 
 - latex: TeX compile command  
 .texファイルをコンパイルして.pdfファイルを生成
+
+#### Upcomming
+- ppaths
+print environment variables to read easily
