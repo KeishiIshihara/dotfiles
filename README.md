@@ -12,6 +12,8 @@ version 2.1
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 - [ ] Maintain pyenv's versions and each requirements lists.
 - [ ] Pyenv install script
+- [ ] .vim is necessary?
+- [ ] 
 
 ## Install and deploy dotfiles
 Clone this repository onto your home directory.
