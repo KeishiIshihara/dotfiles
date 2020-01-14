@@ -1,0 +1,61 @@
+#!/bin/bash
+
+
+# find . -type d -print0 | while read -d '' -r dir; do
+#     files=("$dir"/*)
+#     printf "%5d files in directory %s\n" "${#files[@]}" "$dir"
+# done
+
+version=1.0
+
+
+usage_exit() {
+        echo "Usage: $0 [-h] [-g term] dir" 1>&2
+        echo "   File counting command inside the directory"
+        echo
+        echo "Options:"
+        echo "  -h, show this help"
+        echo "      --version: "$version
+        echo "  -g TERM, grep by TERM"
+        echo
+        exit 1
+}
+
+count_files_with_grep_exit() {
+    DIR=$2
+    GTERM=$1
+    if [ ! -n $DIR ]; then : ; else DIR=. ; fi # check if DIR is specified
+    echo 'dir:'$DIR' , grep by: '$GTERM
+    echo
+    for d in `find $DIR -type d | sort`; do
+        echo $d: `ls -1U "$d" | grep $GTERM | wc -l`
+    done
+    echo 'total '$(ls -U * | grep $GTERM | wc -l)
+    exit 1
+}
+
+count_all_files_inside_exit() {
+    DIR=$1
+    if [ ! -n $DIR ]; then echo aaa ; else DIR=. ; fi # check if DIR is specified
+    echo 'dir:'$DIR
+    echo
+    for d in `find $DIR -type d | sort`; do
+        echo $d: `ls -1U "$d" | wc -l`
+    done
+    echo 'total '$(ls -U * | wc -l)
+    exit 1
+}
+
+while getopts hg: OPT
+do
+    case $OPT in
+        g)  count_files_with_grep_exit $OPTARG $3 ;;
+        h)  usage_exit ;;
+        \?) usage_exit ;;
+    esac
+done
+
+shift $((OPTIND - 1)) # This probably clears rest of args
+
+
+count_all_files_inside_exit $1
