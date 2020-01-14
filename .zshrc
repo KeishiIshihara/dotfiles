@@ -102,10 +102,14 @@ alias tm='tmux'
 alias t='tmux ls'
 alias tl='tmux ls'
 alias ta='tmux a'
+alias tkv='tmux kill-sever'
+alias tks='tmux kill-session -t'
+alias tk='tmux list-keys'
+
+alias smi='nvidia-smi -l 1'
 
 # ---- frequentry commands' setting -----
-# cdの後にlsを実行
-chpwd() { ls -lF --color=auto }
+
 
 # mkdirとcdを同時実行
 function mkcd() {
@@ -131,9 +135,13 @@ setopt no_flow_control
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=xbfxcxdxbxegedabagacad
     alias ls='ls -G'
+    # cdの後にlsを実行
+    chpwd() { ls -FG }
 elif [ "$(uname)" = 'Linux' ]; then
     eval `dircolors ~/.colorrc`
     alias ls='ls --color=auto'
+    # cdの後にlsを実行
+    chpwd() { ls -F --color=auto }
 fi
 
 if [ -n "$LS_COLORS" ]; then
