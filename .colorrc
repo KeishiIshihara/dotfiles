@@ -166,7 +166,7 @@ FILE 00
 # directory
 DIR 36
 # symbolic link
-LINK 35
+LINK 31;07
 
 # pipe, socket, block device, character device (blue bg)
 FIFO 30;44
@@ -486,4 +486,8 @@ EXEC 01;31  # Unix
 ## https://www.atmarkit.co.jp/flinux/rensai/linuxtips/358dircolors.html
 
 *Makefile 01;31
-.mk 01;31;05;41
+.mk 01;31;05
+.zshrc 01;37
+.bashrc 01;37
+.tmux.conf 01;37
+.vimrc 01;37
