@@ -122,6 +122,7 @@ alias lla='ls -lAF'        # Show hidden all files
 alias ll='ls -lF'          # Show long file information
 alias l='ls -1F'          # Show long file information
 alias la='ls -AF'          # Show hidden files
+alias lll='ls -a1'
 alias lx='ls -lXB'         # Sort by extension
 alias lk='ls -lSr'         # Sort by size, biggest last
 alias lc='ls -ltcr'        # Sort by and show change time, most recent last
