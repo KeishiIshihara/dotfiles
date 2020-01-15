@@ -5,6 +5,9 @@
 
 # Make sure that you have installed VSCode and activated code command
 
+set -u # this script uses rm command so just in case
+
+is_success=0
 
 os_detect() {
     if [ "$(uname)" = 'Darwin' ]; then
@@ -13,7 +16,7 @@ os_detect() {
         else
             PLATFORM='unknown-osx'
         fi
-    elif [ "$(uname)" = 'Linux']; then
+    elif [ "$(uname)" = 'Linux' ]; then
         if [ "$(whoami)" = 'keishish' ]; then
             PLATFORM='dluef-kde'
         elif [ "$(whoami)" = 'aisl' ]; then
@@ -50,9 +53,39 @@ if [ "$PLATFORM" = 'unknown-osx' ] || [ "$PLATFORM" = 'ishihara-osx' ]; then
     do
         code --install-extension $line
     done
+    is_success=1
 
 elif [ ! "$PLATFORM" = 'unkown' ]; then
     echo 'Installing vscode extensions on Linux..'
+    SCRIPT_DIR=$(cd $(dirname $0) && pwd)
+    VSCODE_SETTING_DIR=$(echo $HOME/.config/Code/User)
+
+    ls $VSCODE_SETTING_DIR
+    echo
+
+    rm "$VSCODE_SETTING_DIR/settings.json"
+    # mv -b -S `date "+%Y%m%d_%H%M%S"` "$VSCODE_SETTING_DIR/settings.json" "$SCRIPT_DIR/older_settings"
+    ln -sfnv "$SCRIPT_DIR/settings.json" "$VSCODE_SETTING_DIR/settings.json"
+
+    rm "$VSCODE_SETTING_DIR/keybindings.json"
+    # mv -b -S `date "+%Y%m%d_%H%M%S"` "$VSCODE_SETTING_DIR/keybindings.json" "$SCRIPT_DIR/older_settings"
+    ln -sfnv "$SCRIPT_DIR/keybindings.json" "$VSCODE_SETTING_DIR/keybindings.json"
+    
+    # install extention
+    cat extensions | while read line
+    do
+        code --install-extension $line
+    done
+    is_success=1
+
+else
+    echo 'You don'\''t seem Linux or maxOS X.'
+    echo 'Do you want to continue?'
+    read -p "ok? (y/N): " yn
+    case "$yn" in [yY]*) ;; *) echo "abort." ; exit ;; esac
+    echo "Please do it yourself.."
 fi
 
-echo 'done'
+if [ $is_success = 1 ]; then
+    echo 'done'
+fi
