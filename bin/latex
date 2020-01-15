@@ -48,7 +48,7 @@ remove_unnecessary_files_exit() {
     echo
     read -p "ok? (y/N): " yn
     case "$yn" in [yY]*) ;; *) echo "abort." ; exit ;; esac
-    rm -f $REMOVE_TARGET
+    rm $REMOVE_TARGET
     echo "Successfully deleted."
     exit 1
 }
