@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# To update extension list; just do
+#   $ code --list-extensions > extensions
+
+# Make sure that you have installed VSCode and activated code command
+
+
+os_detect() {
+    if [ "$(uname)" = 'Darwin' ]; then
+        if [ "$(whoami)" = 'ishiharakeishi' ]; then
+            PLATFORM='ishihara-osx'
+        else
+            PLATFORM='unknown-osx'
+        fi
+    elif [ "$(uname)" = 'Linux']; then
+        if [ "$(whoami)" = 'keishish' ]; then
+            PLATFORM='dluef-kde'
+        elif [ "$(whoami)" = 'aisl' ]; then
+            PLATFORM='aisl-pc'
+        else
+            PLATFORM='unknown-Linux'
+        fi
+    else
+        PLATFORM='unknown'
+    fi
+}
+
+
+os_detect
+
+# echo $PLATFORM   #ishihara-osx 変数
+# echo '$PLATFORM' #ishihara-osx ただの文字列
+# echo "$PLATFORM" #ishihara-osx $が展開されて文字列
+
+
+if [ "$PLATFORM" = 'unknown-osx' ] || [ "$PLATFORM" = 'ishihara-osx' ]; then
+    echo 'Installing vscode extensions on OSX..'
+    SCRIPT_DIR=$(cd $(dirname $0) && pwd)
+    VSCODE_SETTING_DIR=$(echo $HOME/Library/Application\ Support/Code/User)
+
+    rm "$VSCODE_SETTING_DIR/settings.json"
+    ln -s "$SCRIPT_DIR/settings.json" "${VSCODE_SETTING_DIR}/settings.json"
+
+    rm "$VSCODE_SETTING_DIR/keybindings.json"
+    ln -s "$SCRIPT_DIR/keybindings.json" "${VSCODE_SETTING_DIR}/keybindings.json"
+
+    # install extention
+    cat extensions | while read line
+    do
+        code --install-extension $line
+    done
+
+elif [ ! "$PLATFORM" = 'unkown' ]; then
+    echo 'Installing vscode extensions on Linux..'
+fi
+
+echo 'done'
