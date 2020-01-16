@@ -13,17 +13,17 @@
     },
 
     {
-        "key": "ctrl-j",
+        "key": "ctrl+j",
         "command": "list.focusDown",
-        "when": "listFocus && !inputFocus"
+        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
     },
     {
-        "key": "ctrl-k",
+        "key": "ctrl+k",
         "command": "list.focusUp",
         "when": "listFocus && !inputFocus"
     },
     // make it like vim like but just a little bit
-    // focus 
+    // focus
     {
         "key": "ctrl+h",
         "command": "workbench.action.focusSideBar",

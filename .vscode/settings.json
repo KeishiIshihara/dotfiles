@@ -55,5 +55,6 @@
     "latex-workshop.view.pdf.viewer": "tab",
 "editor.renderControlCharacters": true,
 "editor.largeFileOptimizations": false,
-"workbench.iconTheme": "vscode-icons"
+"workbench.iconTheme": "vscode-icons",
+"workbench.list.keyboardNavigation": "simple"
 }
