@@ -102,7 +102,7 @@ alias tm='tmux'
 alias t='tmux ls'
 alias tl='tmux ls'
 alias ta='tmux a'
-alias tkv='tmux kill-sever'
+alias tkv='tmux kill-server'
 alias tks='tmux kill-session -t'
 alias tk='tmux list-keys'
 
