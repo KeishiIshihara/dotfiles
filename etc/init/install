@@ -570,7 +570,7 @@ dotfiles_install() {
 
     # 3. Execute all sh files within etc/init/
     # ==> initializing
-    dotfiles_initialize "init"
+    dotfiles_initialize "$@"
 }
 
 
@@ -594,6 +594,8 @@ else
 
     # -> cat a.sh | bash
     # -> bash -c "$(cat a.sh)"
+    # -> bash -c "$(curl -fsSL https://raw.githubusercontent.com/KeishiIshihara/dotfiles/master/etc/init/install)" -s init
+    
     if [ -n "${BASH_EXECUTION_STRING:-}" ] || [ -p /dev/stdin ]; then
         # if already vitalized, skip to run dotfiles_install
         if [ "${VITALIZED:=0}" = 1 ]; then # := is initializing this variable if it does not exist.
