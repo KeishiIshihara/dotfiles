@@ -1,7 +1,20 @@
-############
-#  .zshrc  #
-############
+#!/usr/local/bin/zsh
 
+#======================
+#  .zshrc
+#
+#  (c) keishihara
+#======================
+
+os_detect() {
+    export PLATFORM
+    case "$(uname)" in
+        'Darwin')   PLATFORM='osx'     ;;
+        'Linux')    PLATFORM='linux'   ;;
+        *'bsd'*)    PLATFORM='bsd'     ;;
+        *)          PLATFORM='unknown' ;;
+    esac
+}
 
 # ---- basic configs ------
 # source ~/.bashrc
@@ -206,29 +219,25 @@ source ~/.tmuxinator/tmuxinator.zsh
 source ~/.aisl_ssh_list
 
 
-# ------- pyenv config ----------
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-# export PATH="$HOME/.pyenv/shims:$PATH"
-
-
 if [ "$(uname)" = 'Darwin' ]; then
-    echo "Hello Mac!"
-    # ------ selfmade commands -------
-    # # tex compile command
-    # function latex() {
-    #     platex $1.tex &&
-    #     dvipdfmx -p $2 $1.dvi &&
-    #     open $1.pdf &&
-    # }
+    echo "Hello macOS!"
+
+    # ------- pyenv config ----------
+    # pyenvさんに~/.pyenvではなく、/usr/loca/var/pyenvを使うようにお願いする
+    export PYENV_ROOT=/usr/local/var/pyenv
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    if command -v pyenv 1>/dev/null 2>&1; then # pyenvさんに自動補完機能を提供してもらう
+        eval "$(pyenv init -)"
+    fi
+    # eval "$(pyenv virtualenv-init -)"
+    # export PATH="$HOME/.pyenv/shims:$PATH"
 
 elif [ "$(whoami)" = 'aisl' ]; then
     # --------- only aisl pc  -----------
     echo "Hello Ubuntu! on aisl"
 
     [ -r /home/aisl/.byobu/prompt ] && . /home/aisl/.byobu/prompt #byobu-prompt#
+
     # ------ CUDA ----------
     export PATH="/usr/local/cuda/bin:$PATH"
     export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
@@ -243,7 +252,17 @@ elif [ "$(whoami)" = 'aisl' ]; then
     # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
     # 'runc' (Docker default) or 'nvidia' (Nvidia Docker 2).
     export DOCKER_RUNTIME=nvidia
-else # [ "$(whoami)" = "keishish" ]; then #
+
+    # ------- pyenv config ----------
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+    fi
+    # eval "$(pyenv virtualenv-init -)"
+    # export PATH="$HOME/.pyenv/shims:$PATH"
+
+elif [ "$(whoami)" = "keishish" ]; then
     # --------- only the pc @ uef machine learning lab  -----------
     echo "Hello Ubuntu! (KDE neon 5.17)"
 
@@ -258,6 +277,15 @@ else # [ "$(whoami)" = "keishish" ]; then #
 
     # ------ Carla Client ------
     export PYTHONPATH="$PYTHONPATH:/home/keishish/ishihara/carla-0.8.4/PythonClient/carla"
+
+    # ------- pyenv config ----------
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+    fi
+    # eval "$(pyenv virtualenv-init -)"
+    # export PATH="$HOME/.pyenv/shims:$PATH"
 
     # -------- Conda ---------
     # >>> conda initialize >>>
@@ -274,8 +302,39 @@ else # [ "$(whoami)" = "keishish" ]; then #
     fi
     unset __conda_setup
     # <<< conda initialize <<<
-fi
 
+else
+    echo "Unmet OS before!!"
+    # detect os
+    if [ -z "${PLATFORM:=''}" ]; then os_detect; fi
+
+    if [ "${PLATFORM:='unknown'}" = 'osx' ]; then
+        echo "Hello macOS!"
+        # ------- pyenv config ----------
+        # pyenvさんに~/.pyenvではなく、/usr/loca/var/pyenvを使うようにお願いする
+        export PYENV_ROOT=/usr/local/var/pyenv
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        if command -v pyenv 1>/dev/null 2>&1; then # pyenvさんに自動補完機能を提供してもらう
+            eval "$(pyenv init -)"
+        fi
+        # eval "$(pyenv virtualenv-init -)"
+        # export PATH="$HOME/.pyenv/shims:$PATH"
+
+    elif [ "${PLATFORM:='unknown'}" = 'linux' ]; then
+        # ------ CUDA ----------
+
+        # ------- ROS ----------
+
+        # ------- pyenv config ----------
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        if command -v pyenv 1>/dev/null 2>&1; then
+            eval "$(pyenv init -)"
+        fi
+        # eval "$(pyenv virtualenv-init -)"
+        # export PATH="$HOME/.pyenv/shims:$PATH"
+    fi
+fi
 
 
 ## TIPS
