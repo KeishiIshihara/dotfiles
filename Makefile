@@ -61,17 +61,16 @@ update: ## Fetch changes for this repo
 # install: update deploy init ## Run make update, deploy, init
 # 	@exec $$SHELL
 
-clean: ## Remove dot files and this repo
+clean: ## Remove dot files and this repo, *this is dummy command
 	@echo 'Remove dot files in your home directory...'
-	-$(foreach val, $(DOTFILES), ls $(HOME)/$(val);)
-	-ls $(DOTPATH)
+	-$(foreach val, $(TEST_DIR), rm -vrf $(HOME)/$(val);)
+	-rm -rf $(TEST_DIR)
 
-
-clean_backup: ## Remove dot files and this repo
+clean_dotfiles: ## Remove dot files and this repo
 	@echo 'Remove dot files in your home directory...'
-	# @-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
-	@-$(foreach val, $(DOTFILES), ls $(HOME)/$(val);)
-	# -rm -rf $(DOTPATH)
+	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
+	-rm -rf $(DOTPATH)
+
 
 help: ## Self-documented Makefile
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
