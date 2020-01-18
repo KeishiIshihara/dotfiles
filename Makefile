@@ -11,8 +11,13 @@ make_symlinks =  ln -sfnv $(abspath $(val)) $(HOME)/$(val);
 # default target to run
 .DEFAULT_GOAL := list
 
+# check user for sure
+define check
+	@/bin/echo -n "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+endef
+
 # all our targets are phony (no files to check).
-.PHONY : shell show list deploy init init_docker update install help
+.PHONY : shell show list deploy init init_docker update install help check
 
 
 shell: ## Show current os and set EXCLUSIONS
@@ -61,13 +66,16 @@ update: ## Fetch changes for this repo
 # install: update deploy init ## Run make update, deploy, init
 # 	@exec $$SHELL
 
-clean: ## Remove dot files and this repo, *this is dummy command
+clean:  ## Remove dot files and this repo, *this is dummy command
 	@echo 'Remove dot files in your home directory...'
+	$(check)
 	-$(foreach val, $(TEST_DIR), rm -vrf $(HOME)/$(val);)
-	-rm -rf $(TEST_DIR)
+	# -rm -rf $(TEST_DIR)
+	
 
 clean_dotfiles: ## Remove dot files and this repo
 	@echo 'Remove dot files in your home directory...'
+	$(check)
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
 
