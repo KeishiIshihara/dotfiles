@@ -1,19 +1,18 @@
 # dotfiles
 Cool dotfiles  
-This dotfile is made based on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles), [aisl common/dotfiles](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/common/dotfiles)
+This dotfiles repository is made based on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles), [aisl common/dotfiles](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/common/dotfiles)
 
 ### Release
 Please refer to [change log](https://aisl-serv6.aisl.cs.tut.ac.jp:20443/KeishiIshihara/dotfiles/blob/master/CHANGELOG.md) for more info.  
 version 2.1
 
 ### TODO:
-- [ ] Installing test in an unseen environment.
-- [ ] Cleaning up test of this whole dotfile. 
+- [x] Installing test in an unseen environment(macOS).
+- [x] Cleaning up test of this whole dotfile. 
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 - [ ] Maintain pyenv's versions and each requirements lists.
 - [ ] Pyenv install script
-- [ ] .vim is necessary?
-- [ ] 
+- [ ] Install via one line command
 
 ## Install and deploy dotfiles
 Clone this repository onto your home directory.
