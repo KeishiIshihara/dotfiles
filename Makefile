@@ -54,7 +54,7 @@ deploy: shell ## Create symlink to home directory
 init: ## Setup environment settings
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
-init_docker: ## Setup environment settings
+init-docker: ## Setup environment settings
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init_for_docker.sh
 
 update: ## Fetch changes for this repo
@@ -73,7 +73,7 @@ clean:  ## Remove dot files and this repo *this is dummy target
 	@-$(foreach val, $(TEST_DIR), rm -vrf $(HOME)/$(val);)
 	@echo '[WARNING] ｳｿﾋﾟｮｰﾝ(^O^)'
 
-clean_dotfiles: ## Remove dot files and this repo
+clean-dotfiles: ## Remove dot files and this repo
 	@echo 'Remove dot files in your home directory...'
 	@echo "$(DOTPATH)"
 	$(check)
