@@ -1,5 +1,12 @@
 #!/bin/bash
-  
+
+#=========================================
+#  Installation script
+#  
+#  Reference: 
+#    https://github.com/b4b4r07/dotfiles
+#=========================================
+
 #                                    
 #         _ _        _       _       
 #        (_) |      | |     | |      
@@ -363,36 +370,36 @@ is_debug() {
 # }
 
 # # lower returns a copy of the string with all letters mapped to their lower case.
-# # shellcheck disable=SC2120
-# lower() {
-#     if [ $# -eq 0 ]; then
-#         cat <&0
-#     elif [ $# -eq 1 ]; then
-#         if [ -f "$1" -a -r "$1" ]; then
-#             cat "$1"
-#         else
-#             echo "$1"
-#         fi
-#     else
-#         return 1
-#     fi | tr "[:upper:]" "[:lower:]"
-# }
+# shellcheck disable=SC2120
+lower() {
+    if [ $# -eq 0 ]; then
+        cat <&0
+    elif [ $# -eq 1 ]; then
+        if [ -f "$1" -a -r "$1" ]; then
+            cat "$1"
+        else
+            echo "$1"
+        fi
+    else
+        return 1
+    fi | tr "[:upper:]" "[:lower:]"
+}
 
-# # upper returns a copy of the string with all letters mapped to their upper case.
-# # shellcheck disable=SC2120
-# upper() {
-#     if [ $# -eq 0 ]; then
-#         cat <&0
-#     elif [ $# -eq 1 ]; then
-#         if [ -f "$1" -a -r "$1" ]; then
-#             cat "$1"
-#         else
-#             echo "$1"
-#         fi
-#     else
-#         return 1
-#     fi | tr "[:lower:]" "[:upper:]"
-# }
+# upper returns a copy of the string with all letters mapped to their upper case.
+# shellcheck disable=SC2120
+upper() {
+    if [ $# -eq 0 ]; then
+        cat <&0
+    elif [ $# -eq 1 ]; then
+        if [ -f "$1" -a -r "$1" ]; then
+            cat "$1"
+        else
+            echo "$1"
+        fi
+    else
+        return 1
+    fi | tr "[:lower:]" "[:upper:]"
+}
 
 # # contains returns true if the specified string contains
 # # the specified substring, otherwise returns false
@@ -454,10 +461,12 @@ is_debug() {
 # Dotfiles {{{1
 
 # Set DOTPATH as default variable
+
 if [ -z "${DOTPATH:-}" ]; then
-    DOTPATH=$HOME/dotfiles; export DOTPATH¥
+    DOTPATH=$HOME/dotfiles; export DOTPATH
+    echo " DOTPATH is set as $HOME/dotfiles"
 else
-    echo " DOTPATH already exist."
+    echo " DOTPATH already exists."
 fi
 
 DOTFILES_GITHUB="https://github.com/KeishiIshihara/dotfiles.git"; export DOTFILES_GITHUB
@@ -470,7 +479,7 @@ dotfiles_logo='
     |    (_)    |   / _` |/ _ \| __|  _| | |/ _ \/ __| 
     |           |  | (_| | (_) | |_| | | | |  __/\__ \ 
     |___________|   \__,_|\___/ \__|_| |_|_|\___||___/ 
-
+                                        by  keishihara
     *** WHAT IS INSIDE? ***
     1. Download https://github.com/KeishiIshihara/dotfiles.git
     2. Symlinking dot files to your home directory
@@ -495,7 +504,8 @@ dotfiles_download() {
     else
         # installation git here
         # func: install_git
-        :
+        e_error "git is required."
+        exit 1
     fi
 
     git clone --recursive "$DOTFILES_GITHUB" "$DOTPATH"
@@ -556,14 +566,16 @@ dotfiles_install() {
 
     # 2. Deploy dotfiles to your home directory
     # ==> deploying
-    # dotfiles_deploy &&
+    dotfiles_deploy &&
 
     # 3. Execute all sh files within etc/init/
     # ==> initializing
-    # dotfiles_initialize "$@"
+    dotfiles_initialize "init"
 }
 
+
 if echo "$-" | grep -q "i"; then
+
     # -> source a.sh
     VITALIZED=1
     export VITALIZED
@@ -590,7 +602,10 @@ else
 
         trap "e_error 'terminated'; exit 1" INT ERR
         echo "$dotfiles_logo"
+        echo "$@"
+
         dotfiles_install "$@"
+        echo
 
         # Restart shell if specified "bash -c $(curl -L {URL})"
         # not restart:
