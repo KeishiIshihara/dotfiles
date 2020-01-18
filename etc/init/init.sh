@@ -246,7 +246,7 @@ init_for_macOS () {
     #####     Install pyenv      #####
     ##################################
     
-    e_newline && e_done "Initialize"
+    e_newline && e_success "packages are installed."
 }
 
 
