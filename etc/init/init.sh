@@ -10,6 +10,7 @@
 # - [ ] Revise init_for_mac
 
 
+######  UTILS  #####
 is_exists() {
     which "$1" >/dev/null 2>&1
     return $?
@@ -95,6 +96,7 @@ set_dotpath() {
 }
 
 
+######  INITIALIZE FUNCTIONS  #####
 init_for_ubuntu () {
     set_dotpath
 
@@ -213,6 +215,8 @@ init_for_macOS () {
     brew install vim
     # brew install texlive-full
     # brew install latexmk
+    brew install pyenv
+
 
     ####################################
     ##### Install Shougo/neobundle #####
@@ -238,29 +242,23 @@ init_for_macOS () {
 
     bash $DOTPATH/fonts/install.sh
 
-    #########################################################################
-    ##### Install tex-related software #####
-    #########################################################################
 
-    ##################################
-    #####     Install pyenv      #####
-    ##################################
-    
+    # finish
     e_newline && e_success "packages are installed."
 }
 
 
+### echo wrappers usage ###
+#   e_warning '[WARNING] test'
+#   e_header  '[HEADER] test'
+#   e_error   '[ERROR] test'
+#   e_done    '[DONE] test'
+#   e_arrow   '[ARROW] test'
+#   e_success '[ARROW] test'
+#  exit 0
+
 os_detect
 user_detect
-
-# e_warning '[WARNING] test'
-# e_header '[HEADER] test'
-# e_error '[ERROR] test'
-# e_done '[DONE] test'
-# e_arrow '[ARROW] test'
-# e_success '[ARROW] test'
-# exit 0
-
 
 ## Following are my personal used PCs
 if [ "$PLATFORM" = 'osx' ] && [ "$CURRENT_USER" = 'ishihara-mac' ]; then
