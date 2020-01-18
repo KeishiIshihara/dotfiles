@@ -121,6 +121,8 @@ alias tk='tmux list-keys'
 
 alias smi='nvidia-smi -l 1'
 
+alias cdo='cd ~/dotfiles'
+
 # ---- frequentry commands' setting -----
 
 
