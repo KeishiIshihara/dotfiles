@@ -16,4 +16,8 @@
 	c = commit
 	d = diff
 
-	
+[color]
+    ui = auto
+
+[help]
+    autocorrect = 1
