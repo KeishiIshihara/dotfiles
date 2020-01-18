@@ -245,8 +245,8 @@ init_for_macOS () {
     ##################################
     #####     Install pyenv      #####
     ##################################
-    e_newline
-    e_done "Initialization"
+    
+    e_newline && e_done "Initialize"
 }
 
 
