@@ -10,9 +10,8 @@ version 2.2
 - [x] Installing test in an unseen environment(macOS).
 - [x] Cleaning up test of this whole dotfile. 
 - [x] Install via one line command
+- [x] Pyenv install script
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
-- [ ] Maintain pyenv's versions and each requirements lists.
-- [ ] Pyenv install script
 
 ## Installation
 The easiest way to install the dotfiles:
@@ -70,6 +69,6 @@ $ which func-name # show self-made function
 
 ## References
 1. [b4b4r07/dotfiles: A repository that gathered files starting with dot](https://github.com/b4b4r07/dotfiles)
-2. [dotfiels](https://github.com/amien8/dotfiles-b4b4r07)
+2. [dotfiels (forked one from 1's repository)](https://github.com/amien8/dotfiles-b4b4r07)
 3. [最強の dotfiles 駆動開発と GitHub で管理する運用方法](https://qiita.com/b4b4r07/items/b70178e021bef12cd4a2)
 4. [さいつよのターミナル環境を構築しよう](https://qiita.com/b4b4r07/items/09815eda8ef72e0b472e)
