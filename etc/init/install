@@ -31,13 +31,13 @@
 #     return 1
 # }
 
-# is_bash() {
-#     [ -n "$BASH_VERSION" ]
-# }
+is_bash() {
+    [ -n "$BASH_VERSION" ]
+}
 
-# is_zsh() {
-#     [ -n "$ZSH_VERSION" ]
-# }
+is_zsh() {
+    [ -n "$ZSH_VERSION" ]
+}
 
 # is_at_least() {
 #     if [ -z "$1" ]; then
@@ -75,63 +75,63 @@
 #     fi
 # }
 
-# # ostype returns the lowercase OS name
-# ostype() {
-#     # shellcheck disable=SC2119
-#     uname | lower
-# }
+# ostype returns the lowercase OS name
+ostype() {
+    # shellcheck disable=SC2119
+    uname | lower
+}
 
-# # os_detect export the PLATFORM variable as you see fit
-# os_detect() {
-#     export PLATFORM
-#     case "$(ostype)" in
-#         *'linux'*)  PLATFORM='linux'   ;;
-#         *'darwin'*) PLATFORM='osx'     ;;
-#         *'bsd'*)    PLATFORM='bsd'     ;;
-#         *)          PLATFORM='unknown' ;;
-#     esac
-# }
+# os_detect export the PLATFORM variable as you see fit
+os_detect() {
+    export PLATFORM
+    case "$(ostype)" in
+        *'linux'*)  PLATFORM='linux'   ;;
+        *'darwin'*) PLATFORM='osx'     ;;
+        *'bsd'*)    PLATFORM='bsd'     ;;
+        *)          PLATFORM='unknown' ;;
+    esac
+}
 
-# # is_osx returns true if running OS is Macintosh
-# is_osx() {
-#     os_detect
-#     if [ "$PLATFORM" = "osx" ]; then
-#         return 0
-#     else
-#         return 1
-#     fi
-# }
-# alias is_mac=is_osx
+# is_osx returns true if running OS is Macintosh
+is_osx() {
+    os_detect
+    if [ "$PLATFORM" = "osx" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+alias is_mac=is_osx
 
-# # is_linux returns true if running OS is GNU/Linux
-# is_linux() {
-#     os_detect
-#     if [ "$PLATFORM" = "linux" ]; then
-#         return 0
-#     else
-#         return 1
-#     fi
-# }
+# is_linux returns true if running OS is GNU/Linux
+is_linux() {
+    os_detect
+    if [ "$PLATFORM" = "linux" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
 
-# # is_bsd returns true if running OS is FreeBSD
-# is_bsd() {
-#     os_detect
-#     if [ "$PLATFORM" = "bsd" ]; then
-#         return 0
-#     else
-#         return 1
-#     fi
-# }
+# is_bsd returns true if running OS is FreeBSD
+is_bsd() {
+    os_detect
+    if [ "$PLATFORM" = "bsd" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
 
-# # get_os returns OS name of the platform that is running
-# get_os() {
-#     local os
-#     for os in osx linux bsd; do
-#         if is_$os; then
-#             echo $os
-#         fi
-#     done
-# }
+# get_os returns OS name of the platform that is running
+get_os() {
+    local os
+    for os in osx linux bsd; do
+        if is_$os; then
+            echo $os
+        fi
+    done
+}
 
 e_newline() {
     printf "\n"
@@ -141,40 +141,40 @@ e_header() {
     printf " \033[37;1m%s\033[m\n" "$*"
 }
 
-# e_error() {
-#     printf " \033[31m%s\033[m\n" "✖ $*" 1>&2
-# }
+e_error() {
+    printf " \033[31m%s\033[m\n" "✖ $*" 1>&2
+}
 
-# e_warning() {
-#     printf " \033[31m%s\033[m\n" "$*"
-# }
+e_warning() {
+    printf " \033[31m%s\033[m\n" "$*"
+}
 
 e_done() {
     printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
 }
 
-# e_arrow() {
-#     printf " \033[37;1m%s\033[m\n" "➜ $*"
-# }
+e_arrow() {
+    printf " \033[37;1m%s\033[m\n" "➜ $*"
+}
 
-# e_indent() {
-#     for ((i=0; i<${1:-4}; i++)); do
-#         echon " "
-#     done
-#     if [ -n "$2" ]; then
-#         echo "$2"
-#     else
-#         cat <&0
-#     fi
-# }
+e_indent() {
+    for ((i=0; i<${1:-4}; i++)); do
+        echon " "
+    done
+    if [ -n "$2" ]; then
+        echo "$2"
+    else
+        cat <&0
+    fi
+}
 
-# e_success() {
-#     printf " \033[37;1m%s\033[m%s...\033[32mOK\033[m\n" "✔ " "$*"
-# }
+e_success() {
+    printf " \033[37;1m%s\033[m%s...\033[32mOK\033[m\n" "✔ " "$*"
+}
 
-# e_failure() {
-#     die "${1:-$FUNCNAME}"
-# }
+e_failure() {
+    die "${1:-$FUNCNAME}"
+}
 
 ink() {
     if [ "$#" -eq 0 -o "$#" -gt 2 ]; then
@@ -256,9 +256,9 @@ log_fail() {
     logging ERROR "$1" 1>&2
 }
 
-# log_fail() {
-#     logging WARN "$1"
-# }
+log_fail() {
+    logging WARN "$1"
+}
 
 # log_info() {
 #     logging INFO "$1"
@@ -454,30 +454,30 @@ is_debug() {
 # Dotfiles {{{1
 
 # Set DOTPATH as default variable
-# if [ -z "${DOTPATH:-}" ]; then
-#     DOTPATH=$HOME/dotfiles; export DOTPATH¥
-# else
-#     echo " DOTPATH already exist."
-# fi
+if [ -z "${DOTPATH:-}" ]; then
+    DOTPATH=$HOME/dotfiles; export DOTPATH¥
+else
+    echo " DOTPATH already exist."
+fi
 
 DOTFILES_GITHUB="https://github.com/KeishiIshihara/dotfiles.git"; export DOTFILES_GITHUB
 
 # shellcheck disable=SC1078,SC1079,SC2016
 dotfiles_logo='
-       _       _     ___ _
-      | |     | |  / _(_) |           
-    __| | ___ | |_| |_ _| | ___  ___  
-   / _` |/ _ \| __|  _| | |/ _ \/ __| 
-  | (_| | (_) | |_| | | | |  __/\__ \ 
-   \__,_|\___/ \__|_| |_|_|\___||___/ 
-  *** WHAT IS INSIDE? ***
-  1. Download https://github.com/KeishiIshihara/dotfiles.git
-  2. Symlinking dot files to your home directory
-  3. Execute all sh files within `etc/init/` (optional)
-  See the README for documentation.
-  https://github.com/KeishiIshihara/dotfiles.git
-  Copyright (c) 2020 Keishi Ishihara
-  Licensed under the MIT license.
+     __________         _       _     ___ _  
+    |         |_\      | |     | |  / _(_) |    ~/.*
+    |     _     |    __| | ___ | |_| |_ _| | ___  ___  
+    |    (_)    |   / _` |/ _ \| __|  _| | |/ _ \/ __| 
+    |           |  | (_| | (_) | |_| | | | |  __/\__ \ 
+    |___________|   \__,_|\___/ \__|_| |_|_|\___||___/ 
+
+    *** WHAT IS INSIDE? ***
+    1. Download https://github.com/KeishiIshihara/dotfiles.git
+    2. Symlinking dot files to your home directory
+    3. Execute all sh files within `etc/init/` (optional)
+    See the README for documentation.
+    https://github.com/KeishiIshihara/dotfiles.git
+    (Reference: https://github.com/b4b4r07/dotfiles)
 '
 
 dotfiles_download() {
@@ -487,13 +487,14 @@ dotfiles_download() {
     fi
 
     e_newline
-    e_header "Downloading dotfiles..."
+    # e_header "Downloading dotfiles..."
 
     # check if git is there
     if is_exists "git"; then
-        :
+        e_header "Downloading dotfiles via git..."
     else
         # installation git here
+        # func: install_git
         :
     fi
 
@@ -555,11 +556,11 @@ dotfiles_install() {
 
     # 2. Deploy dotfiles to your home directory
     # ==> deploying
-    dotfiles_deploy &&
+    # dotfiles_deploy &&
 
     # 3. Execute all sh files within etc/init/
     # ==> initializing
-    dotfiles_initialize "$@"
+    # dotfiles_initialize "$@"
 }
 
 if echo "$-" | grep -q "i"; then
@@ -583,7 +584,7 @@ else
     # -> bash -c "$(cat a.sh)"
     if [ -n "${BASH_EXECUTION_STRING:-}" ] || [ -p /dev/stdin ]; then
         # if already vitalized, skip to run dotfiles_install
-        if [ "${VITALIZED:=0}" = 1 ]; then
+        if [ "${VITALIZED:=0}" = 1 ]; then # := is initializing this variable if it does not exist.
             exit
         fi
 
