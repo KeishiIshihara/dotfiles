@@ -4,15 +4,21 @@ This dotfiles repository is made based on: [b4b4r07/dotfiles](https://github.com
 
 ### Release
 Please refer to [change log](./CHANGELOG.md) for more info.  
-version 2.1
+version 2.2
 
-### TODO:
+### TODO
 - [x] Installing test in an unseen environment(macOS).
 - [x] Cleaning up test of this whole dotfile. 
+- [x] Install via one line command
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 - [ ] Maintain pyenv's versions and each requirements lists.
 - [ ] Pyenv install script
-- [ ] Install via one line command
+
+## Installation
+The easiest way to install these dotfiles
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/KeishiIshihara/dotfiles/master/etc/init/install)"
+```
 
 ## Install and deploy dotfiles
 Clone this repository onto your home directory.
@@ -50,11 +56,11 @@ $ docker run -it --name dotfile dotfile/test bash
 ```
 
 ## Troubleshooting 
-Backspace not working when you're asked username or password in shell, just do:
+- Backspace not working when you're asked username or password in shell, just do:
 ```bash
 $ stty erase "^?"
 ```
-Remove selfmade functions or aliases
+- Remove selfmade functions or aliases
 ```bash
 # alias
 $ unalias alias-name
