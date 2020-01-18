@@ -99,6 +99,8 @@ $ which func-name # confirm: self-made function
 - [x] Pyenv install script
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 - [ ] Installing test at Ubuntu and modify documents accordingly.
+- [ ] Installation docker, nvidia-docker, and cuda.
+- [ ] Make it optional if some big software is needed (maybe for ubuntu).
 
 ## References
 1. [b4b4r07/dotfiles: A repository that gathered files starting with dot](https://github.com/b4b4r07/dotfiles)
