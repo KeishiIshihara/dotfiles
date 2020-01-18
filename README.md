@@ -15,20 +15,18 @@ version 2.2
 - [ ] Pyenv install script
 
 ## Installation
-The easiest way to install these dotfiles
+The easiest way to install the dotfiles:
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/KeishiIshihara/dotfiles/master/etc/init/install)"
 ```
-
-## Install and deploy dotfiles
-Clone this repository onto your home directory.
+However, the above command is equivalent to following typical procedures: 
 ```bash
-# Note that this dotfiles project should be named as '~/dotfile', not '~/.dotfile'
 $ git clone --recursive https://github.com/KeishiIshihara/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
-$ make init
-$ make deploy
+$ make init # install packages and setup
+$ make deploy # smlink dot files to home directory 
 ```
+`Note:` the dotfiles directory should be named as `~/dotfile`, not `~/.dotfile`.
 
 ## Primary commands
 This dotfiles mostly go with `make` command. See `make help` for more info. Here is frequently used commands.
