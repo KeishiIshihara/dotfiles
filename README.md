@@ -25,8 +25,13 @@ $ cd ~/dotfiles
 $ make init # install packages and setup
 $ make deploy # smlink dot files to home directory 
 ```
-`Note:` the dotfiles directory should be named as `~/dotfile`, not `~/.dotfile`.
+`Note:` the dotfiles directory should be named as `~/dotfile`, not `~/.dotfile`.  
 
+`Note:` If you are using macOS and you have not installed xcode, you would want to do this first:  
+```terminal.app
+$ xcode-select --install
+$ xcode-select --print-path
+```
 ## Primary commands
 This dotfiles mostly go with `make` command. See `make help` for more info. Here is frequently used commands.
 ```bash
