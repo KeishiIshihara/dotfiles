@@ -2,21 +2,11 @@
 Cool dotfiles  
 This dotfiles repository is made based on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles)
 
-### Release
-Please refer to [change log](./CHANGELOG.md) for more info.  
-version 2.2
-
-### TODO
-- [x] Installing test in an unseen environment(macOS).
-- [x] Cleaning up test of this whole dotfile. 
-- [x] Install via one line command
-- [x] Pyenv install script
-- [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 
 ## Installation
 The easiest way to install the dotfiles:
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/KeishiIshihara/dotfiles/master/etc/init/install)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/KeishiIshihara/dotfiles/master/etc/init/install)" -s init
 ```
 However, the above command is equivalent to following typical procedures: 
 ```bash
@@ -25,13 +15,13 @@ $ cd ~/dotfiles
 $ make init # install packages and setup
 $ make deploy # smlink dot files to home directory 
 ```
-`Note:` the dotfiles directory should be named as `~/dotfile`, not `~/.dotfile`.  
+**Note:** the dotfiles directory should be named as `~/dotfile`, not `~/.dotfile`.  
 
-`Note:` If you are using macOS and you have not installed xcode, you would want to do this first:  
+**Note:** If you are using macOS and you have not installed Xcode, you would want to do this first:  
 ```terminal.app
 $ xcode-select --install
-$ xcode-select --print-path
 ```
+
 ## Primary commands
 This dotfiles mostly go with `make` command. See `make help` for more info. Here is frequently used commands.
 ```bash
@@ -42,7 +32,24 @@ $ make show    # show all dot files
 $ make init    # setup environmental settings
 ```
 
-### Testing on Docker (not confirmed)
+## Setup
+#### Zsh
+To change your shell to Zsh, use `chsh` command.
+```bash
+$ chsh -s $(which zsh)
+```
+**Note:** The shell that you wish to use must be present in the /etc/shells file. You can get the list of available shells:
+```bash
+$ cat /etc/shells
+```
+
+#### macOS
+When setting up a new Mac, you might want to install Xcode command-line tools first.
+```terminal.app
+$ xcode-select --install
+```
+
+### Trial on Docker (not confirmed)
 for more checking purpose in advance.
 ```
 $ cd Docker
@@ -56,6 +63,13 @@ $ docker run -it --name dotfile dotfile/test bash
 # make init_docker
 # make deploy
 ```
+
+### TODO
+- [x] Installing test in an unseen environment(macOS).
+- [x] Cleaning up test of this whole dotfile. 
+- [x] Install via one line command
+- [x] Pyenv install script
+- [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
 
 ## Troubleshooting 
 - Backspace not working when you're asked username or password in shell, just do:
