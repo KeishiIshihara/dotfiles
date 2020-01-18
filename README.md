@@ -1,10 +1,10 @@
 # dotfiles
-Cool dotfiles  
-This dotfiles repository is made based on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles)
+This dotfiles repository is made by drawing on: [b4b4r07/dotfiles](https://github.com/b4b4r07/dotfiles)  
+Currently, I tend to have several workplaces and I use both macOS and Ubuntus with different CUDA versions, so at the moment it is necessary to maintain and host dotfiles at a remote repository. Therefore, these dotfiles are tuned for such platforms.  
 
 
 ## Installation
-The easiest way to install the dotfiles:
+The easiest way to install the dotfiles with one-liner command:
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/KeishiIshihara/dotfiles/master/etc/init/install)" -s init
 ```
@@ -12,18 +12,19 @@ However, the above command is equivalent to following typical procedures:
 ```bash
 $ git clone --recursive https://github.com/KeishiIshihara/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
-$ make init # install packages and setup
-$ make deploy # smlink dot files to home directory 
+$ make init # install packages and setup according to OS
+$ make deploy # smlink dot files under the home directory 
 ```
-**Note:** the dotfiles directory should be named as `~/dotfile`, not `~/.dotfile`.  
 
-**Note:** If you are using macOS and you have not installed Xcode, you would want to do this first:  
+**Note:** The dotfiles directory should be named as `~/dotfile`, not `~/.dotfile`.  
+
+**Note:** If you are using macOS and you have not installed Xcode Command-line Tools, you would want to do this first:  
 ```terminal.app
 $ xcode-select --install
 ```
 
 ## Primary commands
-This dotfiles mostly go with `make` command. See `make help` for more info. Here is frequently used commands.
+The dotfiles mostly go with `make` command. See `make help` for more targets infomation. Here is frequently used commands.
 ```bash
 $ make shell   # show current os or env and set EXCLUSIONS
 $ make list    # show dot files to be deployed
@@ -44,9 +45,19 @@ $ cat /etc/shells
 ```
 
 #### macOS
-When setting up a new Mac, you might want to install Xcode command-line tools first.
+When setting up a new Mac, you might want to install Xcode Command-line Tools first.
 ```terminal.app
 $ xcode-select --install
+```
+## Remove dotfiles
+You can also easily remove the entire dotfiles that are smlinked on home directory with a `~/dotfiles` directory altogether with one-liner:
+```bash
+$ make clean-dotfiles
+```
+
+**Note:** Normally, executing `rm -rf` command inadvertently is super dangerous, so I personally do not want to run it in a script, but it is necessary to have `make clean`. Therefore, there is an additional command for your safety:
+```bash
+$ make clean # This does nothing
 ```
 
 ### Trial on Docker (not confirmed)
@@ -64,27 +75,30 @@ $ docker run -it --name dotfile dotfile/test bash
 # make deploy
 ```
 
+## Troubleshooting 
+#### Backspace not working 
+For example, when you're asked username or password in shell, but you can not modify any of those you typed, just do:
+```bash
+$ stty erase "^?"
+```
+
+#### Remove selfmade functions or aliases
+If you want to remove environment variables or functions you defined in a rc files, just do:
+```bash
+$ unalias alias-name
+$ alias # confirm: alias list
+
+$ unfunction func-name
+$ which func-name # confirm: self-made function
+```
+
 ### TODO
 - [x] Installing test in an unseen environment(macOS).
 - [x] Cleaning up test of this whole dotfile. 
 - [x] Install via one line command
 - [x] Pyenv install script
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
-
-## Troubleshooting 
-- Backspace not working when you're asked username or password in shell, just do:
-```bash
-$ stty erase "^?"
-```
-- Remove selfmade functions or aliases
-```bash
-# alias
-$ unalias alias-name
-$ alias # show alias list
-# self-made function
-$ unfunction func-name
-$ which func-name # show self-made function
-```
+- [ ] Installing test at Ubuntu and modify documents accordingly.
 
 ## References
 1. [b4b4r07/dotfiles: A repository that gathered files starting with dot](https://github.com/b4b4r07/dotfiles)
