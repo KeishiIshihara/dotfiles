@@ -602,7 +602,6 @@ else
 
         trap "e_error 'terminated'; exit 1" INT ERR
         echo "$dotfiles_logo"
-        echo "$@"
 
         dotfiles_install "$@"
         echo
