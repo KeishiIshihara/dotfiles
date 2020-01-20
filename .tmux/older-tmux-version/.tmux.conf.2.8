@@ -1,0 +1,311 @@
+#-----------------------------------
+#  .Tmux.conf
+#
+#  This config is now tuned for 
+#    tmux 2.8 version 
+#
+#-----------------------------------
+
+
+############ 達人に学ぶtmux設定 ############
+## http://qiita.com/murachi1208/items/36d7676558d5535b44db ##
+#
+## http://qiita.com/syui/items/6a9cbd39f221d3b996a3
+
+
+############################################
+#   Tips
+############################################
+#
+#   * C-* ... Ctrl + *
+#   * M-* ...  Alt + *
+#
+#   * "bind-key -r option" allows us to input commands without Prefix during the time.
+#
+#   * "set-option" and "set-window-option" are for session and window settings respectively.
+#
+#   * "bind-key" and "bind" have the same effect.
+#
+#
+############################################
+
+
+############################################
+#   Fundamental settings
+############################################
+
+# Prefix
+set-option -g prefix C-b
+
+# Reload tmux.conf
+bind-key r source-file ~/.tmux.conf \; display "Reload tmux.conf!!"
+
+# Close tmux
+bind C-q kill-session
+
+# Extend display panes time
+set display-panes-time 10000
+
+# Extend repeat time
+set repeat-time 1000
+
+# Enable utf8
+# set-window-option -g utf8 on
+# set-window-option -g status-utf8 on
+
+# Starting number for penes and windows
+set-option -g base-index 0
+set-window-option -g pane-base-index 0
+
+# The maximum line number of window history
+set-option -g history-limit 5000
+
+# Set the sizes of main pane height and width
+set-window-option -g main-pane-height 55
+set-window-option -g main-pane-width 200
+
+#### Colaborate with Vim. #####
+# The following enables Esc to perform rapidly in vim
+set -s escape-time 0
+
+# Smart pane switching with awareness of vim splits
+# http://qiita.com/izumin5210/items/92fd7425999980f9516d
+bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys C-h) || tmux select-pane -L"
+bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys C-j) || tmux select-pane -D"
+bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
+# bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)g?(view|n?vim?)(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+# bind -n 'C-\' if-shell "$is_vim" "send-keys 'C-\\'" "select-pane -l"
+
+############################################
+#   Copy mode
+############################################
+# Vi-like copy mode key binds
+set-window-option -g mode-keys vi
+
+# Start copy mode wiht Prefix+v
+bind-key v copy-mode \; display "Copy mode!!!!!x13"
+
+set -g default-shell $SHELL 
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+
+# Prefix+Enter/y for copying
+# set-option -g default-command "exec reattach-to-user-namespace -l $SHELL"
+bind-key -T copy-mode-vi v     send-keys -X begin-selection
+# bind-key -T copy-mode-vi y     send-keys -X copy-pipe-and-cancel "xclip -i -selection clipboard"
+# bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -selection clipboard"
+
+bind-key -T copy-mode-vi y     send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+
+#unbind -T copy-mode-vi Enter
+
+# Prefix+p for pasting
+bind-key p paste-buffer
+
+# Prefix+v for selecting range
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+
+# Prefix+V for selecting range from the beginning of the line
+bind-key -T copy-mode-vi V send-keys -X select-line
+
+# Prefix+C-v for rectangle selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+
+# y for copying
+bind-key -T copy-mode-vi y send-keys -X copy-selection
+
+# Y for one-line copying
+bind-key -T copy-mode-vi Y send-keys -X copy-line
+
+
+############################################
+#   Pane
+############################################
+# Divide a window (generate a pane) horizontally (Prefix+-) and vertically (Prefix+|)
+bind-key | split-window -h
+bind-key - split-window -v
+
+# Prefix + Ctrl-h/l for switching panes
+# Prefix + Ctrl-h,h,h,h,...
+bind-key -r C-h select-window -t :-
+bind-key -r C-l select-window -t :+
+
+# Ctrl-o also allows us to switch panes without prefix
+#bind-key -n C-o select-pane -t :.+
+
+# Prefix+hjkl for moving from current pane to another pane
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# Prefix+JKHL for resizing a pane
+# Prefix+J,J,J,J,...
+bind-key -r H resize-pane -L 1
+bind-key -r J resize-pane -D 1
+bind-key -r K resize-pane -U 1
+bind-key -r L resize-pane -R 1
+
+
+############################################
+#   Mouse
+#   http://qiita.com/jyotti/items/70a3a8035d767f99f93d
+############################################
+# Enable copy mode with the mouse
+## tmux 1.8
+# set-option -g mouse-select-pane on
+# set-option -g mouse-select-window on
+# set-option -g mouse-resize-pane on
+# set-option -g mode-mouse on
+## newer than tmux 2.0
+set-option -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
+
+############################################
+#   Powerline 
+############################################
+S_LEFT_BOLD=""
+S_LEFT_THIN=""
+S_RIGHT_BOLD=""
+S_RIGHT_THIN=""
+TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="◀"
+TMUX_POWERLINE_SEPARATOR_LEFT_THIN="❮"
+TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="▶"
+TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="❯"
+
+## tmux-powerline setting
+set-option -g status on
+set-option -g status-interval 1 # Reload status bar every second
+# set-option -g status-utf8 on
+set-option -g status-bg colour235
+set-option -g status-justify "left"
+set-option -g status-left-length 60 #100
+set-option -g status-right-length 120 #120
+set-option -g status-left "#(~/.tmux-powerline/powerline.sh left)"
+# set-option -g status-right "#(~/.tmux-powerline/powerline.sh right)#[fg=colour0,bg=colour202]${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}#[fg=colour91,bg=colour202]#(wifi)"
+set-option -g status-right "#(~/.tmux-powerline/powerline.sh right)#{?client_prefix,#[fg=colour202]#[bg=colour91]${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}#[fg=colour202]#[bg=colour91]#(wifi),#[fg=colour0]#[bg=colour202]${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}#[fg=colour91bg=colour202]#(wifi)}"
+# set-option -g status-right ""
+
+set-window-option -g window-status-current-format "#[fg=colour235, bg=colour27]⮀#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]⮀"
+
+# Set status bar on the top
+set-option -g status-position top
+
+# Set the length of status bar both left and right
+# set-option -g status-left-length 90
+# set-option -g status-right-length 90
+
+# #P -> Pane number
+# Print on the left end
+# set-option -g status-left '#H:[#P] #(~/.tmux-powerline/powerline.sh left)'
+# set-option -g status-left '#(~/.tmux-powerline/powerline.sh left)'
+
+# Wi-Fi, battery charge, present time
+# Print on the right end
+# set-option -g status-right '#(~/.tmux-powerline/powerline.sh right) #(wifi) #(battery --tmux) [%Y-%m-%d(%a) %H:%M]'
+# set-option -g status-right '#(wifi) #(battery --tmux) [%Y-%m-%d(%a) %H:%M]'
+
+
+# Centerize (mainly window number etc.)
+# set-option -g status-justify centre
+
+# # Set color of status bar
+set-option -g status-bg "colour238"
+
+# # Set sentence color of status line
+set-option -g status-fg "colour255"
+
+
+
+############################################
+#   Appearance
+############################################
+set-option -g default-terminal screen-256color
+set-option -g terminal-overrides 'xterm:colors=256'
+
+# Colors for status bar
+set-option -g status-fg white
+set-option -g status-bg black
+
+# Colors for window lists
+set-window-option -g window-status-fg cyan
+set-window-option -g window-status-bg default
+set-window-option -g window-status-attr dim
+
+# Make the active window obvious
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg red
+set-window-option -g window-status-current-attr bright
+
+# Colors for pane border
+set-option -g pane-border-fg black
+#set-option -g pane-border-bg black
+
+# Make the active pane obvious
+set-option -g pane-active-border-fg blue
+#set-option -g pane-active-border-bg blue
+
+# Colors for command line
+set-option -g message-fg white
+set-option -g message-bg black
+set-option -g message-attr bright
+
+#### COLOUR (Solarized dark)
+
+# default statusbar colors
+set-option -g status-bg black #base02
+set-option -g status-fg yellow #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg brightred #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg black #base02
+set-option -g pane-active-border-fg brightgreen #base01
+
+# message text
+set-option -g message-bg black #base02
+set-option -g message-fg brightred #orange
+
+# pane number display
+set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange
+
+# clock
+set-window-option -g clock-mode-colour green #green
+
+# bell
+set-window-option -g window-status-bell-style fg=black,bg=red #base02, red
+
+
+############################################
+#   Shell
+############################################
+# Change default sell from bash to zsh
+# on mac
+# if-shell "uname | grep -q Darwin" \
+#     'set-option -g  "reattach-to-user-namespace -l zsh"'
+# if-shell "uname | grep -q Darwin" \
+#   'bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"'
+
+# # on pc @ uef machine learning lab
+if-shell "whoami | grep -q keishish" \
+    'set-option -g default-shell "/bin/zsh"'
+if-shell "whoami | grep -q keishish" \
+    'set -g  "/bin/zsh"'
+
+
+# set-option -g default-shell "/user/local/bin/zsh"
+# set-option -g default-shell "/bin/zsh"
+# set default command
+# set -g  "/bin/zsh"
