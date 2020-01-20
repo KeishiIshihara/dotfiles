@@ -3,6 +3,11 @@ This dotfiles repository is made by drawing on: [b4b4r07/dotfiles](https://githu
 Currently, I tend to have several workplaces and I use both macOS and Ubuntus with different CUDA versions, so at the moment it is necessary to maintain and host dotfiles at a remote repository. Therefore, these dotfiles are tuned for such platforms.  
 
 
+## Features
+Here is my current macOS environment features.
+- **tmux**: 3.0a
+- **zsh**: zsh 5.7.1 (x86_64-apple-darwin17.7.0)
+
 ## Installation
 The easiest way to install the dotfiles with one-liner command:
 ```bash
@@ -34,26 +39,52 @@ $ make init    # setup environmental settings
 ```
 
 ## Setup
-#### Zsh
-To change your shell to Zsh, use `chsh` command.
-```bash
-$ chsh -s $(which zsh)
-```
-**Note:** The shell that you wish to use must be present in the /etc/shells file. You can get the list of available shells:
-```bash
-$ cat /etc/shells
-```
 
 #### macOS
 When setting up a new Mac, you might want to install Xcode Command-line Tools first.
 ```terminal.app
 $ xcode-select --install
 ```
+Second, install Homebrew which is a package manager (or you can just run the above one-liner installation command insted.)
+```bash
+$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+You also might not have new version of zsh. Download it with:
+```bash
+$ brew install zsh
+```
+Then, you have to edit /etc/shells
+```bash
+$ sudo vi /etc/shells
+# List of acceptable shells for chpass(1).
+# Ftpd will not allow users to connect who are not using
+# one of these shells.
+
+/bin/bash
+/bin/csh
+/bin/ksh
+/bin/sh
+/bin/tcsh
+/bin/zsh
+/usr/local/bin/zsh  ## just add this line
+```
+
+#### Zsh
+To change your shell to Zsh, use `chsh` command.
+```bash
+$ chsh -s $(which zsh)
+```
+**Note:** The shell that you wish to use must be present in the /etc/shells file. You can get the list of available shells or you may have to edit it:
+```bash
+$ sudo vi /etc/shells
+```
+
 ## Remove dotfiles
 You can also easily remove the entire dotfiles that are smlinked on home directory with a `~/dotfiles` directory altogether with one-liner:
 ```bash
 $ make clean-dotfiles
 ```
+
 
 **Note:** Normally, executing `rm -rf` command inadvertently is super dangerous, so I personally do not want to run it in a script, but it is necessary to have `make clean`. Therefore, there is an additional command for your safety:
 ```bash
@@ -98,9 +129,11 @@ $ which func-name # confirm: self-made function
 - [x] Install via one line command
 - [x] Pyenv install script
 - [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
+- [ ] Revise tmux-powerline
 - [ ] Installing test at Ubuntu and modify documents accordingly.
 - [ ] Installation docker, nvidia-docker, and cuda.
 - [ ] Make it optional if some big software is needed (maybe for ubuntu).
+- [ ] zgen
 
 ## References
 1. [b4b4r07/dotfiles: A repository that gathered files starting with dot](https://github.com/b4b4r07/dotfiles)
