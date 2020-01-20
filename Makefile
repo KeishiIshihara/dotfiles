@@ -1,7 +1,7 @@
 #variables # Now suited to my mac
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
-# EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .tmux-powerlinerc.default .latexmkrc .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .gitconfig
+# EXCLUSIONS := .DS_Store .git .gitignore .gitmodules .travis.yml bin .tmux-powerlinerc.default .bash_profile .bashrc .zsh .zshenv .zshrc .aisl_ssh_list .gitconfig
 # DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 #command : here are for better understanding
@@ -22,19 +22,24 @@ endef
 
 shell: ## Show current os and set EXCLUSIONS
 ifeq  ($(shell uname),Darwin)
-	@echo 'Hello Mac'
+	@echo 'Hello macOS!'
 	$(eval ENV := $(shell uname))
-	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .vim .colorrc)
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .vscode .vim .colorrc)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
-else ifeq ($(shell whoami), aisl)
+else ifeq ($(shell whoami),aisl)
 	@echo 'Hello ubuntu @ aisl-tut'
 	$(eval ENV := $(shell uname))
-	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .latexmkrc .bash_profile .vim .zshenv .zshrc .zsh .aisl_ssh_list)
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .bash_profile .vscode .vim .zshenv .zshrc .zsh .aisl_ssh_list)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
-else
+else ifeq ($(shell whoami),keishish)
 	@echo 'Hello Linux @ uef machine learning lab'
 	$(eval ENV := $(shell uname))
-	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .latexmkrc .bash_profile .vim)
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .bash_profile .vscode .vim)
+	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
+else ifeq ($(shell uname),Linux)
+	@echo 'Hello Linux!'
+	$(eval ENV := $(shell uname))
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .bash_profile .vscode .vim)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
 endif
 
@@ -66,7 +71,7 @@ update: ## Fetch changes for this repo
 # install: update deploy init ## Run make update, deploy, init
 # 	@exec $$SHELL
 
-clean:  ## Remove dot files and this repo *this is dummy target
+clean:  ## Remove dot files and this repo *dummy target
 	@echo 'Remove dot files in your home directory...'
 	@echo "$(DOTPATH)"
 	$(check)
@@ -80,7 +85,12 @@ clean-dotfiles: ## Remove dot files and this repo
 	@-$(foreach val, $(DOTPATH), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
 
-help: ## Self-documented Makefile
+targets: ## Show this targets list
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+		| sort \
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
