@@ -1,3 +1,8 @@
+# .gitignore
+
+*~
+
+# macOS
 .DS_Store
 
 # Retain bundle folder for vim plugins
@@ -5,21 +10,17 @@
 !.vim/bundle/.gitkeep
 
 # Ignore backup files
-*~
+backup
+.vscode/older_settings
+envar_backup
 
+# font
 Ricty
-test
 fonts
 
-# submodule化しても良いがinit時にgit cloneするので
-# git管理しなくよいファイル
-# .tmux-powerline # 追記：オリジナルの設定をこの中に保存するので
-#                 # これもgit管理する
-# fonts
-
+# other temporary files
 maketest.mk
-backup
-envar_backup
 tex_test
 colortest
-.vscode/older_settings
+test
+.aisl_ssh_list
