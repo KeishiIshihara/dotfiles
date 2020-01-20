@@ -1,37 +1,50 @@
+
+#================================================================
+#
+#  .tmux-powerlinerc
+#
+#	This file will be read by ~/.tmux-powerline/powerline.sh
+#	There should be sort of export commands only.
+#   *Do not comment out script.sh sentences.
+#
+#  (c) keishihara
+#===============================================================
+
 # Default configuration file for tmux-powerline.
 # Modeline {
 #	 vi: foldmarker={,} foldmethod=marker foldlevel=0 tabstop=4 filetype=sh
 # }
 
-General {
+# General {
 	# Show which segment fails and its exit code.
 	export TMUX_POWERLINE_DEBUG_MODE_ENABLED="false"
 	# Use patched font symbols.
 	export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"
 	# The theme to use.
-	export TMUX_POWERLINE_THEME="mac_theme"
+	export TMUX_POWERLINE_THEME="mytheme"
 	# Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_THEMES=""
 	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_SEGMENTS=""
-}
+# }
 
-battery.sh {
+# battery.sh {
 	# How to display battery remaining. Can be {percentage, cute}.
-	export TMUX_POWERLINE_SEG_BATTERY_TYPE="percentage"
-	# How may hearts to show if cute indicators are used.
-	export TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS="5"
-}
+ 	export TMUX_POWERLINE_SEG_BATTERY_TYPE="percentage"
+ 	# How may hearts to show if cute indicators are used.
+ 	export TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS="5"
+# }
 
-date.sh {
+
+# date.sh {
 	# date(1) format for the date. If you don't, for some reason, like ISO 8601 format you might want to have "%D" or "%m/%d/%Y".
 	export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
-}
+# }
 
-disk_usage.sh {
+# disk_usage.sh {
 	# Filesystem to retrieve disk space information. Any from the filesystems available (run "df | awk '{print }'" to check them).
 	export TMUX_POWERLINE_SEG_DISK_USAGE_FILESYSTEM="/"
-}
+# }
 
 # earthquake.sh {
 	# The data provider to use. Currently only "goo" is supported.
@@ -50,10 +63,10 @@ disk_usage.sh {
 	export TMUX_POWERLINE_SEG_EARTHQUAKE_MIN_MAGNITUDE="3"
 # }
 
-hostname.sh {
+# hostname.sh {
 	# Use short or long format for the hostname. Can be {"short, long"}.
 	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
-}
+# }
 
 # macos_notification_count.sh {
 	# App ids to query in notification center, separated by space
@@ -128,17 +141,17 @@ hostname.sh {
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR="♫"
 # }
 
-pwd.sh {
+# pwd.sh {
 	# Maximum length of output.
 	export TMUX_POWERLINE_SEG_PWD_MAX_LEN="40"
-}
+# }
 
-time.sh {
+# time.sh {
 	# date(1) format for the time. Americans might want to have "%I:%M %p".
 	export TMUX_POWERLINE_SEG_TIME_FORMAT="%H:%M"
-}
+# }
 
-weather.sh {
+# weather.sh {
 	# The data provider to use. Currently only "yahoo" is supported.
 	export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="yahoo"
 	# What unit to use. Can be any of {c,f,k}.
@@ -152,4 +165,4 @@ weather.sh {
 	# 2. Find the weather for you location
 	# 3. Copy the last numbers in that URL. e.g. "http://weather.yahoo.com/united-states/california/newport-beach-12796587/" has the numbers "12796587"
 	TMUX_POWERLINE_SEG_WEATHER_LOCATION="1118370"
-}
+# }
