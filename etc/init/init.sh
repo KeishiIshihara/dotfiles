@@ -209,13 +209,15 @@ init_for_macOS () {
     brew install less 
     brew install curl 
     brew install htop 
-    brew install wget 
+    brew install wget
+    brew install zsh
     brew install reattach-to-user-namespace 
     brew install tmux 
     brew install vim
     # brew install texlive-full
     # brew install latexmk
     brew install pyenv
+
 
 
     ####################################
@@ -228,17 +230,17 @@ init_for_macOS () {
     ##### Install tmux-powerline #####
     ##################################
     gem install tmuxinator
-    if [ ! -d "$DOTPATH/.tmux-powerline" ]; then
-        git clone git://github.com/erikw/tmux-powerline.git $DOTPATH/.tmux-powerline
-    else
-        echo ' ~/.tmux-powerline already exists.'
-    fi
 
+    ## .tmux-powerline is now customized and is maintained as a part of this dotfiles repository
+    ## so no need to install from git clone, but only fonts
     if [ ! -d "$DOTPATH/fonts" ]; then
-        git clone https://github.com/powerline/fonts.git $DOTPATH/
+        git clone https://github.com/powerline/fonts.git $DOTPATH/fonts
     else
         echo ' ~/fonts already exists.'
     fi
+
+    # bash fonts/install.sh 
+    # rm -rf fonts
 
     bash $DOTPATH/fonts/install.sh
 
