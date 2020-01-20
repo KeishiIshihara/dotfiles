@@ -1,16 +1,17 @@
 #!/bin/bash
-#-----------------------------
+#===============================
 #
 #    Initialize Environment
 #
-#-----------------------------
+#===============================
 
 # TODO;
 # - [ ] Revise init_for_ubuntu
 # - [ ] Revise init_for_mac
 
 
-######  UTILS  #####
+######  UTILS  ######
+
 is_exists() {
     which "$1" >/dev/null 2>&1
     return $?
@@ -59,27 +60,27 @@ user_detect() {
 }
 
 e_newline() {
-    printf "\n" 
+    printf "\n"
 }
 
 e_header() {
-    printf " \033[37;1m%s\033[m\n" "$*" 
+    printf " \033[37;1m%s\033[m\n" "$*"
 }
 
 e_error() {
-    printf " \033[31m%s\033[m\n" "✖ $*" 1>&2 
+    printf " \033[31m%s\033[m\n" "✖ $*" 1>&2
 }
 
 e_warning() {
-    printf " \033[31m%s\033[m\n" "$*" 
+    printf " \033[31m%s\033[m\n" "$*"
 }
 
 e_done() {
-    printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*" 
+    printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
 }
 
 e_arrow() {
-    printf " \033[37;1m%s\033[m\n" "➜ $*" 
+    printf " \033[37;1m%s\033[m\n" "➜ $*"
 }
 
 e_success() {
@@ -97,20 +98,35 @@ set_dotpath() {
 
 
 ######  INITIALIZE FUNCTIONS  #####
+
 init_for_ubuntu () {
+    ## make sure that dotpath exits
     set_dotpath
 
     sudo apt-get update
     sudo apt update
-    ##############################
-    ##### Install some tools #####
-    ##############################
-    sudo apt install -y less net-tools curl git make htop
+
+    ##################################
+    ##### Install some  packages #####
+    ##################################
+    e_newline
+    e_header "Installing packages..."
+
+    sudo apt install -y gcc make less net-tools curl wget git htop
+    sudo apt install -y build-essentials # c++ compiler
+    sudo apt install -y libffi-dev
+    sudo apt install -y libssl-dev # openssl
+    sudo apt install -y zlib1g-dev
+    sudo apt install -y liblzma-dev
+    sudo apt install -y libbz2-dev # bz2
+    sudo apt install -y libreadline-dev # readline
+    sudo apt install -y libsqlite3-dev # sqlite3
+    sudo apt install -y xclip # for tmux
 
     ####################################
     ##### Install Shougo/neobundle #####
     ####################################
-    sudo apt-get install -y vim
+    sudo apt install -y vim
     git clone https://github.com/Shougo/neobundle.vim $DOTPATH/.vim/bundle/neobundle.vim
     # Then, run :NeoBundleInstall on vim to install the other plugins
 
@@ -118,67 +134,43 @@ init_for_ubuntu () {
     ##### Install tmux-powerline #####
     ##################################
     # Install tmux
-    sudo apt-get install -y aptitude
+    sudo apt install -y aptitude
     sudo aptitude install -y ruby
     sudo aptitude install -y tmux # NOTE: tmux should be version 1.8. Please check whether you have the right version. If not, downgrade it via apt.
 
-    sudo gem install -y rubygems-update
+    sudo gem install rubygems-update
     sudo update_rubygems
     sudo gem install tmuxinator
-    # git clone git://github.com/erikw/tmux-powerline.git ~/tmux-powerline
-    git clone git://github.com/erikw/tmux-powerline.git $DOTPATH/.tmux-powerline
     git clone https://github.com/powerline/fonts.git $DOTPATH/fonts
     bash $DOTPATH/fonts/install.sh
 
     ##################################
     #####     Install pyenv      #####
     ##################################
-    sudo apt install -y zlib1g-dev libssl-dev
     git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-    source $DOTPATH/.bashrc
 
 
     ##################################
     #####     Install zsh        #####
     ##################################
     sudo apt install -y zsh
-    # chsh -s $(which zsh) # change shell bash to zsh # not working
+    if [ ! "$(cat /etc/shells | grep '/usr/bin/zsh')" ]; then
+        eval echo "You have to edit /etc/shells by adding $(which zsh)"
+        eval echo "Then, just do: chsh -s $(which zsh)"
+    fi
 
-    #########################################################################
-    ##### Install Ricty font (http://www.rs.tus.ac.jp/yyusa/ricty.html) #####
-    #########################################################################
-    # # Install FontForge
-    # sudo add-apt-repository ppa:fontforge/fontforge
-    # sudo apt-get update
-    # sudo apt-get install fontforge
-
-    # # Get Google Fonts Inconsolata and M+ IPA synthesized font Migu 1M
-    # mkdir ~/.fonts
-    # cp Ricty/Inconsolata/Inconsolata-Bold.ttf ~/.fonts/
-    # cp Ricty/Inconsolata/Inconsolata-Regular.ttf ~/.fonts/
-    # cp Ricty/migu-1m-20150712/migu-1m-bold.ttf ~/.fonts/
-    # cp Ricty/migu-1m-20150712/migu-1m-regular.ttf ~/.fonts/
-
-    # # Run Ricty ge
-    # ./Ricty/ricty_generator.sh auto
-    # # or ./Ricty/ricty_generator.sh Inconsolata-{Regular,Bold}.ttf migu-1m-{regular,bold}.ttf
-    # mv Ricty-* ~/.fonts/
-    # mv RictyDiscord-* ~/.fonts/
-
-    # # Scan font directories
-    # sudo fc-cache -vf
-    # fc-list | grep Ri
-
-    # # Set Ricty as default font
-    # gconftool-2 --get /apps/gnome-terminal/profiles/Default/font # Show current font
-    # echo "->"
-    # gconftool-2 --set --type string /apps/gnome-terminal/profiles/Default/font "Ricty Regular 12"
+    # if [ ! "$(echo $SHELL | grep 'zsh')" ]; then
+    #     chsh -s $(which zsh) # change shell bash to zsh # not working
+    # fi
 
     #########################################################################
     ##### Install tex-related software #####
     #########################################################################
-    # sudo apt-get install texlive-full
-    # sudo apt-get install latexmk
+    # sudo apt install texlive-full
+    # sudo apt install latexmk
+
+    # finish
+    e_newline && e_success "packages are installed."
 
 }
 
@@ -206,24 +198,23 @@ init_for_macOS () {
     e_newline
     e_header "Installing packages..."
 
-    brew install less 
-    brew install curl 
-    brew install htop 
+    brew install less
+    brew install curl
+    brew install htop
     brew install wget
     brew install zsh
-    brew install reattach-to-user-namespace 
-    brew install tmux 
+    brew install reattach-to-user-namespace
+    brew install tmux
     brew install vim
     # brew install texlive-full
     # brew install latexmk
     brew install pyenv
 
 
-
     ####################################
     ##### Install Shougo/neobundle #####
     ####################################
-    # git clone https://github.com/Shougo/neobundle.vim $DOTPATH/.vim/bundle/neobundle.vim
+    git clone https://github.com/Shougo/neobundle.vim $DOTPATH/.vim/bundle/neobundle.vim
     # Then, run :NeoBundleInstall on vim to install the other plugins
 
     ##################################
@@ -238,10 +229,6 @@ init_for_macOS () {
     else
         echo ' ~/fonts already exists.'
     fi
-
-    # bash fonts/install.sh 
-    # rm -rf fonts
-
     bash $DOTPATH/fonts/install.sh
 
 
