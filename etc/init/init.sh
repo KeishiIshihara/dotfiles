@@ -122,6 +122,7 @@ init_for_ubuntu () {
     sudo apt install -y libreadline-dev # readline
     sudo apt install -y libsqlite3-dev # sqlite3
     sudo apt install -y xclip # for tmux
+    sudo apt install -y libncurses5-dev libgdbm-dev  tcl-dev tk-dev
 
     ####################################
     ##### Install Shougo/neobundle #####
@@ -147,8 +148,14 @@ init_for_ubuntu () {
     ##################################
     #####     Install pyenv      #####
     ##################################
-    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-
+    # pyenv
+    if [ ! -d "$HOME/.pyenv" ]; then
+         git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    fi
+    # pyenv-virtualenv
+    if [ ! -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]; then
+        git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+    fi
 
     ##################################
     #####     Install zsh        #####
