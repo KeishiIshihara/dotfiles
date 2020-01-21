@@ -245,7 +245,7 @@ elif [ "$(whoami)" = 'aisl' ]; then
     export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
     # ------- ROS ----------
-    # It's convenient if the ROS environment variables are automatically added 
+    # It's convenient if the ROS environment variables are automatically added
     # to your bash session every time a new shell is launched. (only if using Linux)
     source /opt/ros/melodic/setup.zsh
     source ~/catkin_ws/develtup.zsh
@@ -259,9 +259,9 @@ elif [ "$(whoami)" = 'aisl' ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     if command -v pyenv 1>/dev/null 2>&1; then
-        eval "$(pyenv init -)"
+        eval "$(pyenv init - zsh --no-rehash)"
+        eval "$(pyenv virtualenv-init -)"
     fi
-    # eval "$(pyenv virtualenv-init -)"
     # export PATH="$HOME/.pyenv/shims:$PATH"
 
 elif [ "$(whoami)" = "keishish" ]; then
@@ -272,7 +272,7 @@ elif [ "$(whoami)" = "keishish" ]; then
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
 
     # ------- ROS ----------
-    # It's convenient if the ROS environment variables are automatically added 
+    # It's convenient if the ROS environment variables are automatically added
     # to your bash session every time a new shell is launched. (only if using Linux)
     source /opt/ros/melodic/setup.zsh
     source ~/catkin_ws/devel/setup.zsh
@@ -284,9 +284,9 @@ elif [ "$(whoami)" = "keishish" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     if command -v pyenv 1>/dev/null 2>&1; then
-        eval "$(pyenv init -)"
+        eval "$(pyenv init - zsh --no-rehash)"
+        eval "$(pyenv virtualenv-init -)"
     fi
-    # eval "$(pyenv virtualenv-init -)"
     # export PATH="$HOME/.pyenv/shims:$PATH"
 
     # -------- Conda ---------
