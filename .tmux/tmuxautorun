@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # A tmux auto-run script 
 # which was copied from http://qiita.com/b4b4r07/items/01359e8a3066d1c37edc
 
