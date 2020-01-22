@@ -59,40 +59,26 @@ user_detect() {
     fi
 }
 
-e_newline() {
-    printf "\n"
-}
+e_newline() { printf "\n"; }
 
-e_header() {
-    printf " \033[37;1m%s\033[m\n" "$*"
-}
+e_header() { printf " \033[37;1m%s\033[m\n" "$*"; }
 
-e_error() {
-    printf " \033[31m%s\033[m\n" "✖ $*" 1>&2
-}
+e_error() { printf " \033[31m%s\033[m\n" "✖ $*" 1>&2; }
 
-e_warning() {
-    printf " \033[31m%s\033[m\n" "$*"
-}
+e_warning() {printf " \033[31m%s\033[m\n" "$*"; }
 
-e_done() {
-    printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
-}
+e_done() { printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"; }
 
-e_arrow() {
-    printf " \033[37;1m%s\033[m\n" "➜ $*"
-}
+e_arrow() { printf " \033[37;1m%s\033[m\n" "➜ $*"; }
 
-e_success() {
-    printf " \033[37;1m%s\033[m%s...\033[32mOK\033[m\n" "✔ " "$*"
-}
+e_success() { printf " \033[37;1m%s\033[m%s...\033[32mOK\033[m\n" "✔ " "$*"; }
 
 set_dotpath() {
     if [ -z "${DOTPATH:-}" ]; then
         DOTPATH=$HOME/dotfiles; export DOTPATH
-        echo " DOTPATH is set as $HOME/dotfiles"
+        echo "  DOTPATH is set as $DOTPATH"
     else
-        echo " DOTPATH already exists."
+        echo "  DOTPATH=$DOTPATH: already exists."
     fi
 }
 
@@ -245,6 +231,7 @@ init_for_macOS () {
 
 
 ### echo wrappers usage ###
+#   e_newline
 #   e_warning '[WARNING] test'
 #   e_header  '[HEADER] test'
 #   e_error   '[ERROR] test'
