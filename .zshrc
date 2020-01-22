@@ -32,8 +32,6 @@ export PATH="$HOME/bin:$PATH"
 export DOTPATH=$HOME'/dotfiles'
 export PATH="$DOTPATH/bin:$PATH"
 
-
-
 # 色を使用
 autoload -Uz colors
 colors
@@ -121,7 +119,7 @@ alias tk='tmux list-keys'
 
 alias smi='nvidia-smi -l 1'
 
-alias cdo='cd ~/dotfiles'
+alias cdo="cd $DOTPATH"
 
 # ---- frequentry commands' setting -----
 
@@ -216,7 +214,7 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 # tmux
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source ~/.tmuxinator/tmuxinator.zsh
-# source ~/.tmuxautorun
+source ~/.tmux/tmuxautorun
 # aisl ip address
 source ~/.aisl_ssh_list
 
