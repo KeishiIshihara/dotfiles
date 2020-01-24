@@ -267,7 +267,9 @@ elif [ "$(whoami)" = "keishish" ]; then
     echo "Hello Ubuntu! (KDE neon 5.17)"
 
     # --------- cuda 10.0 (only pc@uef) -----------
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
+    # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
+    export PATH="/usr/local/cuda/bin:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
     # ------- ROS ----------
     # It's convenient if the ROS environment variables are automatically added
