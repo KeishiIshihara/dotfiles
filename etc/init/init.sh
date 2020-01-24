@@ -121,13 +121,16 @@ init_for_ubuntu () {
     ##### Install tmux-powerline #####
     ##################################
     # Install tmux
-    sudo apt install -y aptitude
-    sudo aptitude install -y ruby
-    sudo aptitude install -y tmux # NOTE: tmux should be version 1.8. Please check whether you have the right version. If not, downgrade it via apt.
+    # sudo apt install -y aptitude
+    # sudo aptitude install -y ruby
+    # sudo aptitude install -y tmux # NOTE: tmux should be version 1.8. Please check whether you have the right version. If not, downgrade it via apt.
 
-    sudo gem install rubygems-update
-    sudo update_rubygems
-    sudo gem install tmuxinator
+    # sudo gem install rubygems-update
+    # sudo update_rubygems
+    # sudo gem install tmuxinator
+    sudo apt install -y tmux
+    sudo apt install -y tmuxinator
+    
     git clone https://github.com/powerline/fonts.git $DOTPATH/fonts
     bash $DOTPATH/fonts/install.sh
 

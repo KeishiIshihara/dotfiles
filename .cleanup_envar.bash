@@ -29,6 +29,16 @@ os_detect() {
     fi
 }
 
+# os_detect() {
+#     export PLATFORM
+#     case "$(uname)" in
+#         'Darwin')   PLATFORM='osx'     ;;
+#         'Linux')    PLATFORM='linux'   ;;
+#         *'bsd'*)    PLATFORM='bsd'     ;;
+#         *)          PLATFORM='unknown' ;;
+#     esac
+# }
+
 
 os_detect
 # echo $PLATFORM
@@ -100,10 +110,10 @@ else
 fi
 
 if [ $is_successed = 1 ]; then
-    echo 'Congrats! Cleaned up every single env variables'\'' name!'
+    echo 'Congrats! Cleaned up every single env variables!'
     echo '(Please ignore if Runtime error occured from awk command)'
 else
-    echo '[WARNING] It went something wrong with cleaning up env variables'
+    echo '[WARNING] It went something wrong with cleaning up env variables.'
     echo '          Please check dotfiles/.cleanup_envar.bash'
 fi
 
