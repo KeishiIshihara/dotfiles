@@ -1,0 +1,27 @@
+# ~/.tmuxinator/ros.yml
+
+# Enable vim color scheme on tmuxinator
+#http://unskilled.site/tmux%E3%81%A7tmuxinator%E3%82%92%E4%BD%BF%E3%81%86%E6%99%82%E3%81%AE256%E8%89%B2%E5%95%8F%E9%A1%8C/
+tmux_options: -2 -f ~/.tmux.conf
+
+name: dl
+root: ~/ishihara/autoencoder-model
+pre:
+
+windows:
+    - Launch:
+        layout: 6cd1,147x56,0,0[147x26,0,0{109x26,0,0,0,37x26,110,0[37x19,110,0,5,37x6,110,20,12]},147x29,0,27{85x29,0,27,2,61x29,86,27[61x14,86,27,3,61x14,86,42,6]}]
+        panes:
+            - workspace:
+                - cd ~/ishihara/autoencoder-model/CIL
+            - tensorboard:
+                - cd /media/ssd1/imitation-learning-dataset/data_version_20200113/tflog && tensorboard --logdir=.
+            - clock:
+                # - tmux clock-mode
+            - workspace2:
+                - cd ~/ishihara/autoencoder-model/CIL && smi
+            - htop:
+                htop
+            - dataset:
+                - cd /media/ssd1/imitation-learning-dataset/data_version_20200113
+
