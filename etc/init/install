@@ -471,7 +471,8 @@ fi
 
 DOTFILES_GITHUB="https://github.com/KeishiIshihara/dotfiles.git"; export DOTFILES_GITHUB
 
-# shellcheck disable=SC1078,SC1079,SC2016
+
+# previous logo
 dotfiles_logo='
      __________         _       _     ___ _  
     |         |_\      | |     | |  / _(_) |    ~/.*
@@ -488,6 +489,27 @@ dotfiles_logo='
     https://github.com/KeishiIshihara/dotfiles.git
     (Reference: https://github.com/b4b4r07/dotfiles)
 '
+
+e_dotlogo () {
+    echo -e     '\e[36m\n
+    ==========================================================================================
+
+     ___________ 
+    |   \e[34m       | \e[36m\              .o8                .    .o88o.  o8o  oooo                  
+    |   \e[34m       |__\e[36m\            "888              .o8    888 `"  `"`  `888                  
+    |   \e[34m    _  \e[36m    |       .oooo888   .ooooo.  .o888oo o888oo  oooo   888   .ooooo.   .oooo.o
+    |   \e[34m   (_) \e[36m    |      d88  `888  d88   88b   888    888     888   888  d88  `88b d88(  "8
+    |              |      888   888  888   888   888    888     888   888  888ooo888 `"Y88b.
+    |              |  \e[34m.o.\e[36m 888   888  888   888   888 .  888     888   888  888    .o o.  )88b
+    |______________|  \e[34mY8P\e[36m `Y8bod88P  `Y8bod8P`   "888" o888o   o888o o888o  Y8bod8P" 8""888P`
+                                                                            \e[34m by keishihara \e[36m
+
+
+    ==========================================================================================
+    \e[m
+'
+}
+
 
 dotfiles_download() {
     if [ -d "$DOTPATH" ]; then # -d: true if it is a directory
@@ -603,7 +625,8 @@ else
         fi
 
         trap "e_error 'terminated'; exit 1" INT ERR
-        echo "$dotfiles_logo"
+        # echo "$dotfiles_logo"
+        e_dotlogo
 
         dotfiles_install "$@"
         echo
