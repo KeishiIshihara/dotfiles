@@ -11,17 +11,26 @@ function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
 function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
+function tmux_logo () {
+echo '\e[31m\n
+    ooooooooooooo
+    8`   888   `8
+         888      ooo. .oo.  .oo.   oooo  oooo  oooo    ooo
+         888      `888P"Y88bP"Y88b  `888  `888   `88b..8P
+         888       888   888   888   888   888     Y888`
+         888       888   888   888   888   888   .o8"`88b
+        o888o     o888o o888o o888o  `V88V"V8P` o88`   888o
+    \e[m'
+}
+
 function tmux_automatically_attach_session()
-{
+{   
+
     if is_screen_or_tmux_running; then
         ! is_exists 'tmux' && return 1
 
         if is_tmux_runnning; then
-            echo "${fg_bold[red]} _____ __  __ _   ___  __ ${reset_color}"
-            echo "${fg_bold[red]}|_   _|  \/  | | | \ \/ / ${reset_color}"
-            echo "${fg_bold[red]}  | | | |\/| | | | |\  /  ${reset_color}"
-            echo "${fg_bold[red]}  | | | |  | | |_| |/  \  ${reset_color}"
-            echo "${fg_bold[red]}  |_| |_|  |_|\___//_/\_\ ${reset_color}"
+            tmux_logo
         elif is_screen_running; then
             echo "This is on screen."
         fi

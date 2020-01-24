@@ -6,14 +6,30 @@
 #  (c) keishihara
 #======================
 
+ostype() {
+    echo ${(L):-$(uname)}
+}
+
 os_detect() {
     export PLATFORM
-    case "$(uname)" in
-        'Darwin')   PLATFORM='osx'     ;;
-        'Linux')    PLATFORM='linux'   ;;
+    case "$(ostype)" in
+        *'linux'*)  PLATFORM='linux'   ;;
+        *'darwin'*) PLATFORM='osx'     ;;
         *'bsd'*)    PLATFORM='bsd'     ;;
         *)          PLATFORM='unknown' ;;
     esac
+}
+
+function command_not_found_handler() {
+    echo -e '\e[31m
+    ooooo      ooo               .    .o88o.                                         .o8
+    `888b.     `8`             .o8    888 `"                                        "888
+     8 `88b.    8   .ooooo.  .o888oo o888oo   .ooooo.  oooo  oooo  ooo. .oo.    .oooo888
+     8   `88b.  8  d88` `88b   888    888    d88` `88b `888  `888  `888P"Y88b  d88` `888
+     8     `88b.8  888   888   888    888    888   888  888   888   888   888  888   888
+     8       `888  888   888   888 .  888    888   888  888   888   888   888  888   888
+    o8o        `8  `Y8bod8P`   "888" o888o   `Y8bod8P`  `V88V"V8P` o888o o888o `Y8bod88P"
+    '
 }
 
 # ---- basic configs ------
@@ -214,7 +230,6 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 # tmux
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source ~/.tmuxinator/tmuxinator.zsh
-source ~/.tmux/tmuxautorun
 # aisl ip address
 source ~/.aisl_ssh_list
 
@@ -347,5 +362,10 @@ fi
 eval $DOTPATH/bin/backupenv # make backup of current env
 source ~/.cleanup_envar.bash
 
+
 echo "sucessfully sourced .zshrc"
+
+# Launch and attach to tmux server
+source ~/.tmux/tmuxautorun
+
 

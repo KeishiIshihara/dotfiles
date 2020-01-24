@@ -15,18 +15,31 @@
 # - [x] make it compatible with macOS also: `env -0` is not avairable on macOS
 # - [x] procude a backup file of the Env Var before cleaning up them just in case
 
+# os_detect() {
+#     if [ "$(whoami)" = 'ishiharakeishi' ]; then
+#         # export PLATFORM
+#         PLATFORM='osx'
+#     elif [ "$(whoami)" = 'keishish' ]; then
+#         PLATFORM='dluef-kde'
+#     elif [ "$(whoami)" = 'aisl' ]; then
+#         PLATFORM='aisl-pc'
+#     else
+#         PLATFORM='unknown'
+#     fi
+# }
+
+ostype() {
+    echo ${(L):-$(uname)}
+}
 
 os_detect() {
-    if [ "$(whoami)" = 'ishiharakeishi' ]; then
-        # export PLATFORM
-        PLATFORM='osx'
-    elif [ "$(whoami)" = 'keishish' ]; then
-        PLATFORM='dluef-kde'
-    elif [ "$(whoami)" = 'aisl' ]; then
-        PLATFORM='aisl-pc'
-    else
-        PLATFORM='unknown'
-    fi
+    export PLATFORM
+    case "$(ostype)" in
+        *'linux'*)  PLATFORM='linux'   ;;
+        *'darwin'*) PLATFORM='osx'     ;;
+        *'bsd'*)    PLATFORM='bsd'     ;;
+        *)          PLATFORM='unknown' ;;
+    esac
 }
 
 
@@ -37,7 +50,7 @@ is_successed=0
 declare -a envar=()
 ln=0
 
-if [ $PLATFORM = 'dluef-kde' ]; then
+if [ $PLATFORM = 'linux' ]; then
     for i in `env -0 | tr '\r\n' ' ' | sed 's/\x0/\n/g' | sed 's/=.*//'`
     do
         # echo $ln; echo $i
@@ -77,33 +90,16 @@ elif [ $PLATFORM = 'osx' ]; then
     done
     is_successed=1
 
-
-elif [ $PLATFORM = 'aisl-pc' ]; then
-    echo 'this is aisl-pc'
-    echo 'this isn'\'' t enabled yet.'
-    # for i in `env -0 | tr '\r\n' ' ' | sed 's/\x0/\n/g' | sed 's/=.*//'`
-    # do
-    #     # echo $ln; echo $i
-    #     envar+=("$i") # store the value of variable as one "element"
-    #     ln=$((++ln)) # equivalent to let ln++
-    # done
-
-    # for var in "${envar[@]}"; do
-    #     new_path=$(eval echo \"\$$var\" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
-    #     command="export $(echo $var)=\"$new_path\""
-    #     eval $command
-    # done
-    is_successed=0
 else
     echo 'this is unknown pc'
     is_successed=0
 fi
 
 if [ $is_successed = 1 ]; then
-    echo 'Congrats! Cleaned up every single env variables'\'' name!'
+    echo 'Congrats! Cleaned up every single env variables!'
     echo '(Please ignore if Runtime error occured from awk command)'
 else
-    echo '[WARNING] It went something wrong with cleaning up env variables'
+    echo '[WARNING] It went something wrong with cleaning up env variables.'
     echo '          Please check dotfiles/.cleanup_envar.bash'
 fi
 
