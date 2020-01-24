@@ -65,7 +65,7 @@ e_header() { printf " \033[37;1m%s\033[m\n" "$*"; }
 
 e_error() { printf " \033[31m%s\033[m\n" "✖ $*" 1>&2; }
 
-e_warning() {printf " \033[31m%s\033[m\n" "$*"; }
+e_warning() { printf " \033[31m%s\033[m\n" "$*"; }
 
 e_done() { printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"; }
 
@@ -130,7 +130,7 @@ init_for_ubuntu () {
     # sudo gem install tmuxinator
     sudo apt install -y tmux
     sudo apt install -y tmuxinator
-    
+
     git clone https://github.com/powerline/fonts.git $DOTPATH/fonts
     bash $DOTPATH/fonts/install.sh
 
