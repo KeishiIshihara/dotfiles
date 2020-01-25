@@ -6,6 +6,11 @@
 #  (c) keishihara
 #======================
 
+
+## UTILs here
+
+e_header() { printf " \033[37;1m%s\033[m\n" "$*"; }
+
 ostype() {
     echo ${(L):-$(uname)}
 }
@@ -31,6 +36,9 @@ function command_not_found_handler() {
     o8o        `8  `Y8bod8P`   "888" o888o   `Y8bod8P`  `V88V"V8P` o888o o888o `Y8bod88P"
     '
 }
+
+
+## .zshrc starts here
 
 # ---- basic configs ------
 # source ~/.bashrc
@@ -231,7 +239,7 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 source ~/.tmuxinator/tmuxinator.zsh
 # aisl ip address
-source ~/.aisl_ssh_list
+if [ -f "$HOME/.aisl_ssh_list" ]; then source ~/.aisl_ssh_list; fi
 
 
 if [ "$(uname)" = 'Darwin' ]; then
@@ -279,7 +287,7 @@ elif [ "$(whoami)" = 'aisl' ]; then
 
 elif [ "$(whoami)" = "keishish" ]; then
     # --------- only the pc @ uef machine learning lab  -----------
-    echo "Hello Ubuntu! (KDE neon 5.17)"
+    e_header "Hello Ubuntu! (KDE neon 5.17)"
 
     # --------- cuda 10.0 (only pc@uef) -----------
     # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
