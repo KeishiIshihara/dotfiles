@@ -9,13 +9,11 @@
 
 ## UTILs here
 
-e_header() { printf " \033[37;1m%s\033[m\n" "$*"; }
-
-ostype() {
-    echo ${(L):-$(uname)}
-}
-
-os_detect() {
+function e_header() { printf " \033[37;1m%s\033[m\n" "$*"; }
+function ostype() { echo ${(L):-$(uname)}; }
+function is_osx() { [[ $OSTYPE == darwin* ]]; }
+function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
+function os_detect() {
     export PLATFORM
     case "$(ostype)" in
         *'linux'*)  PLATFORM='linux'   ;;
@@ -137,11 +135,13 @@ alias tm='tmux'
 alias t='tmux ls'
 alias tl='tmux ls'
 alias ta='tmux a'
-alias tkv='tmux kill-server'
-alias tks='tmux kill-session -t'
+alias tksv='tmux kill-server'
+alias tkss='tmux kill-session -t'
 alias tk='tmux list-keys'
 
-alias smi='nvidia-smi -l 1'
+if type "nvidia-smi" >/dev/null 2>&1; then
+    alias smi='nvidia-smi -l 1'
+fi
 
 alias cdo="cd $DOTPATH"
 
@@ -243,7 +243,7 @@ if [ -f "$HOME/.aisl_ssh_list" ]; then source ~/.aisl_ssh_list; fi
 
 
 if [ "$(uname)" = 'Darwin' ]; then
-    echo "Hello macOS!"
+    e_header "Hello  macOS!"
 
     # ------- pyenv config ----------
     # pyenvさんに~/.pyenvではなく、/usr/loca/var/pyenvを使うようにお願いする
