@@ -139,14 +139,12 @@ alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 alias tk='tmux list-keys'
 
-if type "nvidia-smi" >/dev/null 2>&1; then
+# if type "nvidia-smi" >/dev/null 2>&1; then
+if is_exists "nvidia-smi"; then
     alias smi='nvidia-smi -l 1'
 fi
 
-alias cdo="cd $DOTPATH"
-
-# ---- frequentry commands' setting -----
-
+alias cdo="cd $DOTPATH && git status"
 
 # mkdirとcdを同時実行
 function mkcd() {
@@ -367,13 +365,11 @@ fi
 # env variable (export) should be written in .bash_profile or .zprofile or .zshenv
 
 # Cleanup enery single Env Variables
-eval $DOTPATH/bin/backupenv # make backup of current env
-source ~/.cleanup_envar.bash
+eval $DOTPATH/bin/backupenv         # make backup of current env
+source $DOTPATH/bin/cleanup_envar   # cleanup messsy env variables
 
-
-echo "sucessfully sourced .zshrc"
+# Finish sourcing .zshrc
+echo '.zshrc: Sucessfully sourced;)'
 
 # Launch and attach to tmux server
 source ~/.tmux/tmuxautorun
-
-

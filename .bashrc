@@ -139,12 +139,15 @@ alias tm='tmux'
 alias t='tmux ls'
 alias tl='tmux ls'
 alias ta='tmux a'
-alias tkv='tmux kill-sever'
-alias tks='tmux kill-session -t'
+alias tksv='tmux kill-sever'
+alias tkss='tmux kill-session -t'
 alias tk='tmux list-keys'
 
-alias smi='nvidia-smi -l 1'
+if type "nvidia-smi" >/dev/null 2>&1; then
+    alias smi='nvidia-smi -l 1'
+fi
 
+alias cdo="cd $DOTPATH && git status"
 
 cdls ()
 {
@@ -289,6 +292,11 @@ fi
 # env variable (export) should be written in .bash_profile or .zprofile or .zshenv
 
 # Cleanup enery single Env Variables
-source ~/.cleanup_envar.bash
+eval $DOTPATH/bin/backupenv         # make backup of current env
+source $DOTPATH/bin/cleanup_envar   # cleanup messsy env variables
 
-echo "sucessfully sourced .bashrc"
+# Finish sourcing .bashrc
+echo '.bashrc: Sucessfully sourced;)'
+
+# Launch and attach to tmux server
+source ~/.tmux/tmuxautorun
