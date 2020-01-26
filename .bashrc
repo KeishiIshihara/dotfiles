@@ -135,14 +135,6 @@ alias lu='ls -ltur'        # Sort by and show access time, most recent last
 alias lt='ls -ltr'         # Sort by date, most recent last
 alias lr='ls -lR'          # Recursive ls
 
-alias tm='tmux'
-alias t='tmux ls'
-alias tl='tmux ls'
-alias ta='tmux a'
-alias tksv='tmux kill-sever'
-alias tkss='tmux kill-session -t'
-alias tk='tmux list-keys'
-
 if type "nvidia-smi" >/dev/null 2>&1; then
     alias smi='nvidia-smi -l 1'
 fi
