@@ -102,17 +102,3 @@ else
     echo '[WARNING] It went something wrong with cleaning up env variables.'
     echo '          Please check dotfiles/.cleanup_envar.bash'
 fi
-
-
-
-# PATH:
-# /Users/ishiharakeishi/.pyenv/shims
-# /Users/ishiharakeishi/.pyenv/bin
-# /Users/ishiharakeishi/bin
-# /Users/ishiharakeishi/Library/Python/2.7/bin
-# /usr/local/bin
-# /Users/ishiharakeishi/.tmux/bin
-# /usr/bin
-# /bin
-# /usr/sbin
-# /sbin
