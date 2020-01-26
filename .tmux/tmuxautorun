@@ -1,7 +1,11 @@
 #!/bin/bash
+#--------------------------------
+#
+#  A tmux auto-run script
+#
+#--------------------------------
+# source: https://qiita.com/ssh0/items/a9956a74bff8254a606a
 
-# A tmux auto-run script
-# which was copied from http://qiita.com/b4b4r07/items/01359e8a3066d1c37edc
 
 PERCOL=peco
 
@@ -81,6 +85,7 @@ function tmux_automatically_attach_session()
                         echo 'Starting nomal terminal only..'
                     fi
                 fi
+
             else # if server is not running
                 echo -n "Tmux: create new session? (y/N) "
                 read
@@ -97,4 +102,17 @@ function tmux_automatically_attach_session()
         fi
     fi
 }
+
+if [[ -n $TMUX ]]; then
+  alias ta='tmux switch-client -t'
+else
+  alias ta='tmux attach-session'
+fi
+alias t='tmux ls'
+alias tl='tmux ls'
+alias tksv='tmux kill-server'
+alias tkss='tmux kill-session -t'
+alias tk='tmux list-keys'
+alias ts='tmux_automatically_attach_session'
+
 tmux_automatically_attach_session
