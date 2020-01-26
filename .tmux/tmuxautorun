@@ -3,6 +3,8 @@
 # A tmux auto-run script
 # which was copied from http://qiita.com/b4b4r07/items/01359e8a3066d1c37edc
 
+PERCOL=peco
+
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
 function is_screen_running() { [ ! -z "$STY" ]; }
@@ -22,9 +24,13 @@ echo '\e[31m
         o888o     o888o o888o o888o  `V88V"V8P` o88`   888o\e[m\n'
 }
 
+
+
+
+
+
 function tmux_automatically_attach_session()
 {
-
     if is_screen_or_tmux_running; then
         ! is_exists 'tmux' && return 1
 
@@ -34,42 +40,93 @@ function tmux_automatically_attach_session()
             echo "This is on screen."
         fi
     else
+
         if shell_has_started_interactively && ! is_ssh_running; then
             if ! is_exists 'tmux'; then
                 echo 'Error: tmux command not found' 2>&1
                 return 1
             fi
 
-            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
-                # detached session exists
-                tmux list-sessions
-                echo -n "Tmux: attach? (y/N/num) "
+            # if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
+            #     # detached session exists
+            #     tmux list-sessions
+            #     # ID="$(tmux list-sessions)" # "" --> make it string type
+            #     IDs=$(echo "$(tmux ls)" | cut -d: -f1)
+                
+            #     echo -n "Tmux: attach? (y/N/name)"
+            #     read
+            #     echo "$REPLY"
+
+            #     if [[ "$REPLY" =~ ^[Yy]$ ]] || [[ "$REPLY" == '' ]]; then ## Y(y)(es) or nothing --> attach to last session
+            #         tmux attach-session
+            #         if [ $? -eq 0 ]; then
+            #             echo "$(tmux -V) attached session"
+            #             return 0
+            #         fi
+            #     elif [[ "$REPLY" =~ ^[0-9]+$ ]]; then
+            #         tmux attach -t "$REPLY"
+            #         if [ $? -eq 0 ]; then
+            #             echo "$(tmux -V) attached session $REPLY"
+            #             return 0
+            #         fi
+            #     # elif [[ "$REPLY" =~ ^[Nn]$ ]]
+            #     else
+            #         : # Start terminal only
+            #     fi
+            # fi
+
+            if tmux has-session >/dev/null 2>&1; then
+                # PERCOL=escape # for debug
+                if is_exists $PERCOL; then 
+                    # get the IDs
+                    ID="$(tmux list-sessions)"
+                    if [[ -z "$ID" ]]; then # or if [ "$?"=1 ];
+                        tmux new-session
+                    fi
+                    create_new_session="Create New Session"
+                    ID="$ID\n${create_new_session}:"
+                    ID="$(echo $ID | $PERCOL | cut -d: -f1)"
+                    if [[ "$ID" = "${create_new_session}" ]]; then
+                        tmux new-session
+                    elif [ -n "$ID" ]; then
+                        tmux attach-session -t "$ID"
+                    else
+                        : # Start terminal only
+                    fi
+                else
+                    tmux ls
+                    ID="$(tmux ls)"
+                    IDs=$(echo "$ID" | cut -d: -f1)
+                    echo -n "Tmux: attach? (y/N/session) "
+                    read
+                    if [[ "$REPLY" =~ ^[Yy]$ ]]; then # Y(y)
+                        echo 'tmux attached session'
+                        tmux attach-session
+                    elif [[ "$REPLY" =~ ^[Nn]$ ]]; then # N(n)
+                        echo 'Start nomal terminal.'
+                    elif [ -n "$REPLY" ] && [ $(echo "$IDs" | grep "${REPLY}") ]; then # session
+                        echo "Attaching to $REPLY."
+                        tmux attach-session -t "$REPLY"
+                    elif [ -n "$REPLY" ]; then # if $REPLY has more than 0 strings
+                        # tmux attach-session -t "$ID"
+                        echo "$REPLY"': No such tmux session found.'
+                    else
+                        echo 'Start nomal terminal.'
+                    fi
+                fi
+            else # if server is not running
+                echo -n "Tmux: create new session? (y/N) "
                 read
-                if [[ "$REPLY" =~ ^[Yy]$ ]] || [[ "$REPLY" == '' ]]; then
-                    tmux attach-session
-                    if [ $? -eq 0 ]; then
-                        echo "$(tmux -V) attached session"
-                        return 0
-                    fi
-                elif [[ "$REPLY" =~ ^[0-9]+$ ]]; then
-                    tmux attach -t "$REPLY"
-                    if [ $? -eq 0 ]; then
-                        echo "$(tmux -V) attached session $REPLY"
-                        return 0
-                    fi
+                if [[ "$REPLY" =~ ^[Yy]$ ]]; then # Y(y)
+                    echo 'Creating new session..'
+                    tmux new-session
+                elif [[ "$REPLY" =~ ^[Nn]$ ]]; then # N(n)
+                    echo 'Starting normal terminal only..'
                 else
                     :
                 fi
             fi
 
-            if is_osx && is_exists 'reattach-to-user-namespace'; then
-                # on OS X force tmux's default command
-                # to spawn a shell in the user's namespace
-                tmux_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
-                tmux -f <(echo "$tmux_config") new-session && echo "$(tmux -V) created new session supported OS X"
-            else
-                tmux new-session && echo "tmux created new session"
-            fi
         fi
     fi
 }
