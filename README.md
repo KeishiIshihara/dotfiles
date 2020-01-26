@@ -8,6 +8,10 @@ Here is my current macOS environment features.
 - **tmux**: 3.0a
 - **zsh**: zsh 5.7.1 (x86_64-apple-darwin17.7.0)
 
+KDE neon 5.17 environment features are as follows.
+- **tmux**: 2.6
+- **zsh**: zsh 5.4.2 (x86_64-ubunut-linux-gnu)
+
 ## Installation
 The easiest way to install the dotfiles with one-liner command:
 ```bash
@@ -128,10 +132,8 @@ $ which func-name # confirm: self-made function
 - [x] Cleaning up test of this whole dotfile. 
 - [x] Install via one line command
 - [x] Pyenv install script
-- [ ] Make sure which shell will be initialized after installing dotfiles. For such case that you are working on somewhere you don't want or must not change to zsh.
-- [ ] Revise tmux-powerline
+- [x] Revise tmux-powerline
 - [ ] Installing test at Ubuntu and modify documents accordingly.
-- [ ] Installation docker, nvidia-docker, and cuda.
 - [ ] Make it optional if some big software is needed (maybe for ubuntu).
 - [ ] zgen
 
