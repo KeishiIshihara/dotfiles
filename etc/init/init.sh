@@ -159,7 +159,7 @@ init_for_ubuntu () {
     # fi
 
     sudo apt install -y peco
-    sudo apt install -y fzf
+    # sudo apt install -y fzf
 
     #########################################################################
     ##### Install tex-related software #####
@@ -167,7 +167,7 @@ init_for_ubuntu () {
     # sudo apt install texlive-full
     # sudo apt install latexmk
 
-    # finish
+   # finish
     e_newline && e_success "packages are installed."
 
 }
