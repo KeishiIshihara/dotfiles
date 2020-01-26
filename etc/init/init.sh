@@ -154,10 +154,12 @@ init_for_ubuntu () {
         eval echo "You have to edit /etc/shells by adding $(which zsh)"
         eval echo "Then, just do: chsh -s $(which zsh)"
     fi
-
     # if [ ! "$(echo $SHELL | grep 'zsh')" ]; then
     #     chsh -s $(which zsh) # change shell bash to zsh # not working
     # fi
+
+    sudo apt install -y peco
+    sudo apt install -y fzf
 
     #########################################################################
     ##### Install tex-related software #####
@@ -202,6 +204,8 @@ init_for_macOS () {
     brew install reattach-to-user-namespace
     brew install tmux
     brew install vim
+    brew install peco
+    brew install fzf
     # brew install texlive-full
     # brew install latexmk
     brew install pyenv
