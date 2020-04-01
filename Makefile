@@ -29,7 +29,8 @@ ifeq  ($(shell uname),Darwin)
 else ifeq ($(shell whoami),aisl)
 	@echo 'Hello ubuntu @ aisl-tut'
 	$(eval ENV := $(shell uname))
-	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .bash_profile .vscode .vim .zshenv .zshrc .zsh .aisl_ssh_list)
+	# $(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .bash_profile .vscode .vim .zshenv .zshrc .zsh .aisl_ssh_list)
+	$(eval EXCLUSIONS := .DS_Store .git .gitignore .gitmodules bin .tmux-powerlinerc.default .bash_profile .vscode .vim .aisl_ssh_list)
 	$(eval DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES)))
 else ifeq ($(shell whoami),keishish)
 	@echo 'Hello Linux @ uef machine learning lab'
