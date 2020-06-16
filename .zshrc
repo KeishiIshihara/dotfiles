@@ -255,13 +255,14 @@ elif [ "$(whoami)" = 'aisl' ]; then
 
     # ------ CUDA ----------
     export PATH="/usr/local/cuda/bin:$PATH"
+    # export LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH"
     export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
     # ------- ROS ----------
     # It's convenient if the ROS environment variables are automatically added
     # to your bash session every time a new shell is launched. (only if using Linux)
     source /opt/ros/melodic/setup.zsh
-    source ~/catkin_ws/develtup.zsh
+    source ~/catkin_ws/devel/setup.zsh
     export CARLA_ROS_BRIDGE=/home/aisl/carla_0.8.4/carla/carla_ros_bridge
 
     # Set default Docker runtime to use in '~/HSR/docker/docker-compose.yml':
